@@ -6,17 +6,20 @@
   
   <title>给TextView个别字设置点击事件和颜色 | WEIQIANGHU BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
+  <meta name="description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？今天就简单实现以下如图的效果。具体实现步骤如下代码块：
+123456789101112TextView textView = helper.getView(R.id.tv_question_title); //这里就是findViewByIdSpannableString spannableString = new Spanna">
 <meta property="og:type" content="article">
 <meta property="og:title" content="给TextView个别字设置点击事件和颜色">
 <meta property="og:url" content="http://weiqianghu.github.io/2016/05/27/给TextView个别字设置点击事件和颜色/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
+<meta property="og:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？今天就简单实现以下如图的效果。具体实现步骤如下代码块：
+123456789101112TextView textView = helper.getView(R.id.tv_question_title); //这里就是findViewByIdSpannableString spannableString = new Spanna">
 <meta property="og:image" content="http://weiqianghu.github.io/images/TextView.png">
-<meta property="og:updated_time" content="2016-05-27T09:12:55.824Z">
+<meta property="og:updated_time" content="2016-05-27T09:20:21.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给TextView个别字设置点击事件和颜色">
-<meta name="twitter:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
+<meta name="twitter:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？今天就简单实现以下如图的效果。具体实现步骤如下代码块：
+123456789101112TextView textView = helper.getView(R.id.tv_question_title); //这里就是findViewByIdSpannableString spannableString = new Spanna">
 <meta name="twitter:image" content="http://weiqianghu.github.io/images/TextView.png">
   
     <link rel="alternative" href="/atom.xml" title="WEIQIANGHU BLOG" type="application/atom+xml">
@@ -91,7 +94,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？<br><img src="/images/TextView.png" alt=""></p>
+        <p>像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？<br><img src="/images/TextView.png" alt=""><br>今天就简单实现以下如图的效果。具体实现步骤如下代码块：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TextView textView = helper.getView(R.id.tv_question_title); <span class="comment">//这里就是findViewById</span></span><br><span class="line">SpannableString spannableString = <span class="keyword">new</span> SpannableString(item);</span><br><span class="line">spannableString.setSpan(<span class="keyword">new</span> TopicSpanWrapper() &#123;  <span class="comment">//TopicSpanWrapper是ClickableSpan的自定义类，为了取消默认的下划线</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View widget)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, <span class="string">"我被点击了"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;, <span class="number">4</span>, <span class="number">8</span>, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);</span><br><span class="line">spannableString.setSpan(<span class="keyword">new</span> ForegroundColorSpan(Color.parseColor(<span class="string">"#6EA6E0"</span>)), <span class="number">4</span>,<span class="number">8</span>, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);<span class="comment">//设置字体的颜色</span></span><br><span class="line"></span><br><span class="line">textView.setText(spannableString);</span><br><span class="line">textView.setMovementMethod(LinkMovementMethod.getInstance());</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicSpanWrapper</span> <span class="keyword">extends</span> <span class="title">ClickableSpan</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateDrawState</span><span class="params">(TextPaint ds)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.updateDrawState(ds);</span><br><span class="line">        <span class="comment">// 去掉超链接的下划线</span></span><br><span class="line">        ds.setUnderlineText(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过以上步骤就实现了上图所示的效果。</p>
 
       
     </div>
