@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WEIQIANGHU BLOG</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://weiqianghu.github.io/"/>
+  <updated>2016-05-31T07:23:38.857Z</updated>
+  <id>http://weiqianghu.github.io/</id>
+  
+  <author>
+    <name>Weiqianghu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android—_Studio常用快捷键</title>
+    <link href="http://weiqianghu.github.io/2016/05/31/Android%E2%80%94-Studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>http://weiqianghu.github.io/2016/05/31/Android—-Studio常用快捷键/</id>
+    <published>2016-05-31T06:37:49.000Z</published>
+    <updated>2016-05-31T07:23:38.857Z</updated>
+    
+    <content type="html">&lt;p&gt;  Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。&lt;/p&gt;
+&lt;p&gt;Ctrl+Alt+L：格式化代码&lt;/p&gt;
+&lt;p&gt;##Log&lt;/p&gt;
+&lt;p&gt;logt:直接打logt自动生成TAG&lt;br&gt;logd,logm,loge:生成log&lt;/p&gt;
+&lt;p&gt;##代码移动&lt;/p&gt;
+&lt;p&gt;Ctrl+W: 选中代码，连续按会改变选中范围&lt;br&gt;Ctrl+Shift+方向键：代码移动&lt;br&gt;Ctrl+D:复制当前行到小一行&lt;br&gt;Alt+Up/Down:在类中的方法间移动&lt;/p&gt;
+&lt;p&gt;##代码查看&lt;/p&gt;
+&lt;p&gt;Ctrl+Shift+N：打开一个文件&lt;br&gt;Ctrl+N：打开一个类&lt;br&gt;Ctrl+Alt+Shift+N：查找类中的方法或变量&lt;br&gt;Ctrl+U:查看一个类的父类&lt;br&gt;Ctrl+Alt+H：查看一个方法的调用&lt;br&gt;Ctrl+Shift+I：在类中查看方法的实现&lt;br&gt;Ctrl+H：查看类的结构&lt;br&gt;Ctrl+Alt+Left：代码返回&lt;br&gt;Alt+左右方向键：切换窗口&lt;br&gt;Alt+1：打开或关闭工程面板&lt;br&gt;Ctrl+F12：显示当前文件的结构&lt;br&gt;Ctrl+O：复写父类的方法&lt;br&gt;Ctrl+Alt+T：选中一块代码之后，利用此键可快速添加模板代码&lt;/p&gt;
+&lt;p&gt;##代码生成&lt;/p&gt;
+&lt;p&gt;Ctrl+J：可以生成很多模板代码&lt;/p&gt;
+&lt;p&gt;##查找和替换&lt;/p&gt;
+&lt;p&gt;Ctrl+R：查找 替换&lt;br&gt;Ctrl+F：查找文件&lt;br&gt;Ctrl+E：打开最近的文件&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。&lt;/p&gt;
+&lt;p&gt;Ctrl+Alt+L：格式化代码&lt;/p&gt;
+&lt;p&gt;#
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://weiqianghu.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>给TextView个别字设置点击事件和颜色</title>
+    <link href="http://weiqianghu.github.io/2016/05/27/%E7%BB%99TextView%E4%B8%AA%E5%88%AB%E5%AD%97%E8%AE%BE%E7%BD%AE%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%92%8C%E9%A2%9C%E8%89%B2/"/>
+    <id>http://weiqianghu.github.io/2016/05/27/给TextView个别字设置点击事件和颜色/</id>
+    <published>2016-05-27T09:03:42.000Z</published>
+    <updated>2016-05-27T09:20:21.154Z</updated>
+    
+    <content type="html">&lt;p&gt;像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？&lt;br&gt;&lt;img src=&quot;/images/TextView.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;今天就简单实现以下如图的效果。具体实现步骤如下代码块：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;TextView textView = helper.getView(R.id.tv_question_title); &lt;span class=&quot;comment&quot;&gt;//这里就是findViewById&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SpannableString spannableString = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; SpannableString(item);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spannableString.setSpan(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; TopicSpanWrapper() &amp;#123;  &lt;span class=&quot;comment&quot;&gt;//TopicSpanWrapper是ClickableSpan的自定义类，为了取消默认的下划线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(View widget)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Toast.makeText(mContext, &lt;span class=&quot;string&quot;&gt;&quot;我被点击了&quot;&lt;/span&gt;, Toast.LENGTH_SHORT).show();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spannableString.setSpan(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ForegroundColorSpan(Color.parseColor(&lt;span class=&quot;string&quot;&gt;&quot;#6EA6E0&quot;&lt;/span&gt;)), &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);&lt;span class=&quot;comment&quot;&gt;//设置字体的颜色&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;textView.setText(spannableString);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;textView.setMovementMethod(LinkMovementMethod.getInstance());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;TopicSpanWrapper&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ClickableSpan&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;updateDrawState&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(TextPaint ds)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.updateDrawState(ds);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 去掉超链接的下划线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ds.setUnderlineText(&lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过以上步骤就实现了上图所示的效果。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？&lt;br&gt;&lt;img src=&quot;/images/TextView.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;今天就简单实现以下如图的效果。具体实现步骤如下代码块：&lt;/p&gt;
+&lt;figure class=&quot;highligh
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://weiqianghu.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>软键盘弹出时RecyclerView自动滑到底部</title>
+    <link href="http://weiqianghu.github.io/2016/05/26/%E8%BD%AF%E9%94%AE%E7%9B%98%E5%BC%B9%E5%87%BA%E6%97%B6RecyclerView%E8%87%AA%E5%8A%A8%E6%BB%91%E5%88%B0%E5%BA%95%E9%83%A8/"/>
+    <id>http://weiqianghu.github.io/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/</id>
+    <published>2016-05-26T07:11:43.000Z</published>
+    <updated>2016-05-26T07:47:58.712Z</updated>
+    
+    <content type="html">&lt;p&gt;最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！&lt;/p&gt;
+&lt;h2 id=&quot;利用ListView实现聊天界面&quot;&gt;&lt;a href=&quot;#利用ListView实现聊天界面&quot; class=&quot;headerlink&quot; title=&quot;利用ListView实现聊天界面&quot;&gt;&lt;/a&gt;利用ListView实现聊天界面&lt;/h2&gt;&lt;h3 id=&quot;设置windowSoftInputMode&quot;&gt;&lt;a href=&quot;#设置windowSoftInputMode&quot; class=&quot;headerlink&quot; title=&quot;设置windowSoftInputMode&quot;&gt;&lt;/a&gt;设置windowSoftInputMode&lt;/h3&gt;&lt;p&gt;在AndroidMnanifest.xml中相应的Activity加上Android:windowSoftInputMode=”adjustResize”&lt;/p&gt;
+&lt;h3 id=&quot;设置ListView中transcriptMode&quot;&gt;&lt;a href=&quot;#设置ListView中transcriptMode&quot; class=&quot;headerlink&quot; title=&quot;设置ListView中transcriptMode&quot;&gt;&lt;/a&gt;设置ListView中transcriptMode&lt;/h3&gt;&lt;p&gt;在布局文件中的ListView中加入android:transcriptMode=”normal”&lt;/p&gt;
+&lt;p&gt;通过以上步骤利用ListView实现的聊天界面就可以在软键盘弹出时正常工作了。但是作为一名有追求的Android开发工程师怎么会满足于&lt;br&gt;利用ListView呢？应该利用功能更加强大，更加灵活的RecyclerView来实现啊！&lt;/p&gt;
+&lt;h2 id=&quot;利用RecyclerView实现聊天界面&quot;&gt;&lt;a href=&quot;#利用RecyclerView实现聊天界面&quot; class=&quot;headerlink&quot; title=&quot;利用RecyclerView实现聊天界面&quot;&gt;&lt;/a&gt;利用RecyclerView实现聊天界面&lt;/h2&gt;&lt;p&gt;利用RecyclerView实现聊天界面的步骤和ListView基本一致，但是软键盘弹出时怎么让消息列表自动滑到底部呢？各位同学可以试一试&lt;br&gt;RecyclerView没有ListView中的transcriptMode属性。那么在RecyclerView中该怎么做呢？&lt;br&gt;RecyclerView没有这个属性，那么我们只能想别的办法了，最容易想到的办法就是监听软键盘是否弹出，然后手动滚动了，其实这是一个不错的办法，&lt;br&gt;但是Android中不能直接监听软键盘是否弹出，若用这种方法写的代码一点都不够优雅。&lt;br&gt;因此只能另想它法了，既然没办法哪就只能求助于Google了，终于最后让我给找到解决办法了。其实很好办，只需要一句代码：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;LinearLayoutManager layoutManager = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LinearLayoutManager(mContext);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;layoutManager.setStackFromEnd(&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mRecyclerView.setLayoutManager(layoutManager);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mRecyclerView.setHasFixedSize(&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mAdapter = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ChatMessageAdapter(mData, mContext);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mRecyclerView.setAdapter(mAdapter);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mRecyclerView.setItemAnimator(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; DefaultItemAnimator());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;用过RecyclerView的同学应该已经知道了就是这句：layoutManager.setStackFromEnd(true);&lt;br&gt;就是这么简单，一句话搞定。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！&lt;/p&gt;
+&lt;h2 id=&quot;利用ListView实现聊天界面&quot;&gt;&lt;a href=&quot;#利用ListView实现聊天界面&quot; class=&quot;header
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://weiqianghu.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的第一篇博客</title>
+    <link href="http://weiqianghu.github.io/2016/05/26/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://weiqianghu.github.io/2016/05/26/我的第一篇博客/</id>
+    <published>2016-05-26T05:47:56.000Z</published>
+    <updated>2016-05-26T07:25:29.392Z</updated>
+    
+    <content type="html">&lt;p&gt;欢迎来到我的博客，这是我用 &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt; 建的博客。大家也可以自己尝试建站。&lt;br&gt;第一次写博客语言还很不熟练，大家见谅啊！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;欢迎来到我的博客，这是我用 &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt; 建的博客。大家也可以自己尝试建站。&lt;br&gt;第一次写博客语言还很不熟练，大家见谅啊！&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="Introduction" scheme="http://weiqianghu.github.io/tags/Introduction/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://weiqianghu.github.io/2016/05/26/hello-world/"/>
+    <id>http://weiqianghu.github.io/2016/05/26/hello-world/</id>
+    <published>2016-05-26T01:22:06.343Z</published>
+    <updated>2016-05-26T01:22:06.343Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
