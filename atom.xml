@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-06-02T04:06:51.736Z</updated>
+  <updated>2016-06-08T09:11:57.565Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提高Gradle构建速度</title>
+    <link href="http://weiqianghu.github.io/2016/06/08/%E6%8F%90%E9%AB%98Gradle%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6/"/>
+    <id>http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/</id>
+    <published>2016-06-08T08:47:51.000Z</published>
+    <updated>2016-06-08T09:11:57.565Z</updated>
+    
+    <content type="html">&lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，&lt;br&gt;今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;在下面的目录下面创建gradle-properties文件：&quot;&gt;&lt;a href=&quot;#在下面的目录下面创建gradle-properties文件：&quot; class=&quot;headerlink&quot; title=&quot;在下面的目录下面创建gradle.properties文件：&quot;&gt;&lt;/a&gt;在下面的目录下面创建gradle.properties文件：&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;/home/&amp;lt;username&amp;gt;/.gradle/ (Linux)
+/Users/&amp;lt;username&amp;gt;/.gradle/ (Mac)
+C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在gradle.properties文件中加入下面内容&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#开启守护进程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.daemon=true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Specifies the JVM arguments used for the daemon process.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# The setting is particularly useful for tweaking memory settings.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Default value: -Xmx10248m -XX:MaxPermSize=256m&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#开启并行编译&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.parallel=true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Enables new incubating mode that makes Gradle selective when configuring projects. &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Only relevant projects are configured which results in faster builds for large multi-projects.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.configureondemand=true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;配置Android-Studio&quot;&gt;&lt;a href=&quot;#配置Android-Studio&quot; class=&quot;headerlink&quot; title=&quot;配置Android Studio&quot;&gt;&lt;/a&gt;配置Android Studio&lt;/h2&gt;&lt;p&gt;如下图&lt;br&gt;&lt;img src=&quot;/2016/06/08/提高Gradle构建速度/as_gradle_offline.png&quot; alt=&quot;as_gradle_offline.png&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;通过以上两个步骤可以显著提高Gradle的build速度&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，&lt;br&gt;今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android Gradle" scheme="http://weiqianghu.github.io/tags/Android-Gradle/"/>
+    
+  </entry>
   
   <entry>
     <title>Android中的消息传递机制，Handler、looper、MessageQueue、Message源码探析</title>
