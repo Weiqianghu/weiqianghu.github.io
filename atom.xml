@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-06-08T09:11:57.565Z</updated>
+  <updated>2016-06-08T09:19:48.491Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://weiqianghu.github.io/2016/06/08/%E6%8F%90%E9%AB%98Gradle%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6/"/>
     <id>http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/</id>
     <published>2016-06-08T08:47:51.000Z</published>
-    <updated>2016-06-08T09:11:57.565Z</updated>
+    <updated>2016-06-08T09:19:48.491Z</updated>
     
-    <content type="html">&lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，&lt;br&gt;今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
+    <content type="html">&lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;在下面的目录下面创建gradle-properties文件：&quot;&gt;&lt;a href=&quot;#在下面的目录下面创建gradle-properties文件：&quot; class=&quot;headerlink&quot; title=&quot;在下面的目录下面创建gradle.properties文件：&quot;&gt;&lt;/a&gt;在下面的目录下面创建gradle.properties文件：&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;/home/&amp;lt;username&amp;gt;/.gradle/ (Linux)
 /Users/&amp;lt;username&amp;gt;/.gradle/ (Mac)
@@ -34,7 +34,7 @@ C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
     
     <summary type="html">
     
-      &lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，&lt;br&gt;今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
+      &lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
     
     </summary>
     
