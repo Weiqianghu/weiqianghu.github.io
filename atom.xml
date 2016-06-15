@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-06-08T09:19:48.491Z</updated>
+  <updated>2016-06-15T01:50:09.677Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的I/O</title>
+    <link href="http://weiqianghu.github.io/2016/06/15/Java%E4%B8%AD%E7%9A%84I-O/"/>
+    <id>http://weiqianghu.github.io/2016/06/15/Java中的I-O/</id>
+    <published>2016-06-15T01:14:22.000Z</published>
+    <updated>2016-06-15T01:50:09.677Z</updated>
+    
+    <content type="html">&lt;p&gt;Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。&lt;br&gt;&lt;img src=&quot;/2016/06/15/Java中的I-O/java-io-1.jpg&quot; alt=&quot;java-io-1.jpg&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;输入和输出&quot;&gt;&lt;a href=&quot;#输入和输出&quot; class=&quot;headerlink&quot; title=&quot;输入和输出&quot;&gt;&lt;/a&gt;输入和输出&lt;/h2&gt;&lt;p&gt;在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。&lt;/p&gt;
+&lt;h3 id=&quot;InputStream&quot;&gt;&lt;a href=&quot;#InputStream&quot; class=&quot;headerlink&quot; title=&quot;InputStream&quot;&gt;&lt;/a&gt;InputStream&lt;/h3&gt;&lt;p&gt;InputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、String对象、文件、管道、网络等。&lt;br&gt;与这些来源相对应的类包括：ByteArrayInputStream（允许内存中的一个缓冲区作为InputStream使用）、StringBufferInputStream（将一个String转换成InputStream）、FileInputStream（用于从文件读取信息）。&lt;/p&gt;
+&lt;h3 id=&quot;OutputStream&quot;&gt;&lt;a href=&quot;#OutputStream&quot; class=&quot;headerlink&quot; title=&quot;OutputStream&quot;&gt;&lt;/a&gt;OutputStream&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。&lt;br&gt;&lt;img src=&quot;/2016/06/15/Java中的I-O/java-io-1.jpg&quot; alt=&quot;java-io-1.jpg&quot; title=&quot;&quot;&gt;&lt;/p
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://weiqianghu.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>提高Gradle构建速度</title>
@@ -160,7 +183,7 @@ C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
     <link href="http://weiqianghu.github.io/2016/05/26/%E8%BD%AF%E9%94%AE%E7%9B%98%E5%BC%B9%E5%87%BA%E6%97%B6RecyclerView%E8%87%AA%E5%8A%A8%E6%BB%91%E5%88%B0%E5%BA%95%E9%83%A8/"/>
     <id>http://weiqianghu.github.io/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/</id>
     <published>2016-05-26T07:11:43.000Z</published>
-    <updated>2016-06-02T04:06:55.752Z</updated>
+    <updated>2016-06-08T09:14:20.043Z</updated>
     
     <content type="html">&lt;p&gt;最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;利用ListView实现聊天界面&quot;&gt;&lt;a href=&quot;#利用ListView实现聊天界面&quot; class=&quot;headerlink&quot; title=&quot;利用ListView实现聊天界面&quot;&gt;&lt;/a&gt;利用ListView实现聊天界面&lt;/h2&gt;&lt;h3 id=&quot;设置windowSoftInputMode&quot;&gt;&lt;a href=&quot;#设置windowSoftInputMode&quot; class=&quot;headerlink&quot; title=&quot;设置windowSoftInputMode&quot;&gt;&lt;/a&gt;设置windowSoftInputMode&lt;/h3&gt;&lt;p&gt;在AndroidMnanifest.xml中相应的Activity加上Android:windowSoftInputMode=”adjustResize”&lt;/p&gt;
