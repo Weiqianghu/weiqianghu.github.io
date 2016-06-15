@@ -86,23 +86,17 @@
 
 
 
-<meta name="description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。
-输入和输出在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。
-InputStreamInputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、S">
+<meta name="description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的I/O">
 <meta property="og:url" content="http://weiqianghu.github.io/2016/06/15/Java中的I-O/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。
-输入和输出在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。
-InputStreamInputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、S">
+<meta property="og:description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/06/15/Java中的I-O/java-io-1.jpg">
-<meta property="og:updated_time" content="2016-06-15T01:50:09.677Z">
+<meta property="og:updated_time" content="2016-06-15T09:01:53.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的I/O">
-<meta name="twitter:description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。
-输入和输出在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。
-InputStreamInputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、S">
+<meta name="twitter:description" content="Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。">
 <meta name="twitter:image" content="http://weiqianghu.github.io/2016/06/15/Java中的I-O/java-io-1.jpg">
 
 
@@ -319,6 +313,7 @@ InputStreamInputStream抽象了从不同来源产生的输入类。这些来源�
 
       
         <p>Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。<br><img src="/2016/06/15/Java中的I-O/java-io-1.jpg" alt="java-io-1.jpg" title=""></p>
+<a id="more"></a>
 <h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h2><p>在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。</p>
 <h3 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a>InputStream</h3><p>InputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、String对象、文件、管道、网络等。<br>与这些来源相对应的类包括：ByteArrayInputStream（允许内存中的一个缓冲区作为InputStream使用）、StringBufferInputStream（将一个String转换成InputStream）、FileInputStream（用于从文件读取信息）。</p>
 <h3 id="OutputStream"><a href="#OutputStream" class="headerlink" title="OutputStream"></a>OutputStream</h3>

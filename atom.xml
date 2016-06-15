@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-06-15T01:50:09.677Z</updated>
+  <updated>2016-06-15T09:01:53.827Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,16 +20,17 @@
     <link href="http://weiqianghu.github.io/2016/06/15/Java%E4%B8%AD%E7%9A%84I-O/"/>
     <id>http://weiqianghu.github.io/2016/06/15/Java中的I-O/</id>
     <published>2016-06-15T01:14:22.000Z</published>
-    <updated>2016-06-15T01:50:09.677Z</updated>
+    <updated>2016-06-15T09:01:53.827Z</updated>
     
     <content type="html">&lt;p&gt;Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。&lt;br&gt;&lt;img src=&quot;/2016/06/15/Java中的I-O/java-io-1.jpg&quot; alt=&quot;java-io-1.jpg&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;输入和输出&quot;&gt;&lt;a href=&quot;#输入和输出&quot; class=&quot;headerlink&quot; title=&quot;输入和输出&quot;&gt;&lt;/a&gt;输入和输出&lt;/h2&gt;&lt;p&gt;在Java中可以将I/O库简单的分为输入和输出两部分。从InputStream衍生的所有类都拥有read()方法，从OutputStream衍生的所有类都拥有write()方法。&lt;/p&gt;
 &lt;h3 id=&quot;InputStream&quot;&gt;&lt;a href=&quot;#InputStream&quot; class=&quot;headerlink&quot; title=&quot;InputStream&quot;&gt;&lt;/a&gt;InputStream&lt;/h3&gt;&lt;p&gt;InputStream抽象了从不同来源产生的输入类。这些来源包括：字节数组、String对象、文件、管道、网络等。&lt;br&gt;与这些来源相对应的类包括：ByteArrayInputStream（允许内存中的一个缓冲区作为InputStream使用）、StringBufferInputStream（将一个String转换成InputStream）、FileInputStream（用于从文件读取信息）。&lt;/p&gt;
 &lt;h3 id=&quot;OutputStream&quot;&gt;&lt;a href=&quot;#OutputStream&quot; class=&quot;headerlink&quot; title=&quot;OutputStream&quot;&gt;&lt;/a&gt;OutputStream&lt;/h3&gt;</content>
     
     <summary type="html">
     
-      &lt;p&gt;Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。&lt;br&gt;&lt;img src=&quot;/2016/06/15/Java中的I-O/java-io-1.jpg&quot; alt=&quot;java-io-1.jpg&quot; title=&quot;&quot;&gt;&lt;/p
+      &lt;p&gt;Java中的I/O API 数量众多，掌握起来很困难，这篇文章将梳理一下Java中的I/O库。先来一张类图。&lt;br&gt;&lt;img src=&quot;/2016/06/15/Java中的I-O/java-io-1.jpg&quot; alt=&quot;java-io-1.jpg&quot; title=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
