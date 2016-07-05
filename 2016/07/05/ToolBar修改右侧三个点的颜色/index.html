@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -86,15 +86,16 @@
 
 
 
-<meta name="description" content="珍惜现在拥有的，因为它随时都可能失去">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIQIANGHU BLOG">
-<meta property="og:url" content="http://weiqianghu.github.io/tags/Android-Gradle/index.html">
+<meta name="description" content="ToolBar是Google提供的Material Design 控件，其具体的使用方法就不介绍了，这篇文章将介绍一下怎么修改ToolBar右侧的三个点的颜色。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ToolBar修改右侧三个点的颜色">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/07/05/ToolBar修改右侧三个点的颜色/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="珍惜现在拥有的，因为它随时都可能失去">
+<meta property="og:description" content="ToolBar是Google提供的Material Design 控件，其具体的使用方法就不介绍了，这篇文章将介绍一下怎么修改ToolBar右侧的三个点的颜色。">
+<meta property="og:updated_time" content="2016-07-05T10:33:49.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WEIQIANGHU BLOG">
-<meta name="twitter:description" content="珍惜现在拥有的，因为它随时都可能失去">
+<meta name="twitter:title" content="ToolBar修改右侧三个点的颜色">
+<meta name="twitter:description" content="ToolBar是Google提供的Material Design 控件，其具体的使用方法就不介绍了，这篇文章将介绍一下怎么修改ToolBar右侧的三个点的颜色。">
 
 
 
@@ -112,7 +113,7 @@
   };
 </script>
 
-  <title> 标签: Android Gradle | WEIQIANGHU BLOG </title>
+  <title> ToolBar修改右侧三个点的颜色 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,7 +134,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,46 +242,130 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Android Gradle
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ToolBar修改右侧三个点的颜色
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-05T18:18:09+08:00" content="2016-07-05">
+              2016-07-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/05/ToolBar修改右侧三个点的颜色/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/05/ToolBar修改右侧三个点的颜色/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>ToolBar是Google提供的Material Design 控件，其具体的使用方法就不介绍了，这篇文章将介绍一下怎么修改ToolBar右侧的三个点的颜色。<br><a id="more"></a></p>
+<p>通过使用以下theme就可以解决问题<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"ToolBarTheme"</span> <span class="attr">parent</span>=<span class="string">"@style/ThemeOverlay.AppCompat.Dark.ActionBar"</span>&gt;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionMenuTextColor"</span>&gt;</span>#fff<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionMenuTextAppearance"</span>&gt;</span>@style/AppTheme.actionMenuTextSize<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme.actionMenuTextSize"</span> <span class="attr">parent</span>=<span class="string">"Base.TextAppearance.AppCompat.Widget.ActionBar.Menu"</span>&gt;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textSize"</span>&gt;</span>18sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textStyle"</span>&gt;</span>normal<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最后将此theme设置给ToolBar就可以了<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:theme="@style/ToolBarTheme"</span><br></pre></td></tr></table></figure></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/06/08/提高Gradle构建速度/" itemprop="url">
-              
-                <span itemprop="name">提高Gradle构建速度</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-08T16:47:51+08:00"
-              content="2016-06-08" >
-          06-08
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/15/Java中的I-O/" rel="next" title="Java中的I/O">
+                <i class="fa fa-chevron-left"></i> Java中的I/O
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -288,6 +373,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/05/ToolBar修改右侧三个点的颜色/"
+           data-title="ToolBar修改右侧三个点的颜色" data-url="http://weiqianghu.github.io/2016/07/05/ToolBar修改右侧三个点的颜色/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -307,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
@@ -358,6 +460,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -454,6 +567,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
