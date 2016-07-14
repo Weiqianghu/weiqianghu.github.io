@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android 设计模式 Java," />
 
 
 
@@ -86,15 +86,22 @@
 
 
 
-<meta name="description" content="珍惜现在拥有的，因为它随时都可能失去">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WEIQIANGHU BLOG">
-<meta property="og:url" content="http://weiqianghu.github.io/tags/Java/index.html">
+<meta name="description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
+下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用责任链模式实现加载不同来源的数据">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="珍惜现在拥有的，因为它随时都可能失去">
+<meta property="og:description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
+下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/flow.png">
+<meta property="og:updated_time" content="2016-07-14T10:22:47.909Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WEIQIANGHU BLOG">
-<meta name="twitter:description" content="珍惜现在拥有的，因为它随时都可能失去">
+<meta name="twitter:title" content="利用责任链模式实现加载不同来源的数据">
+<meta name="twitter:description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
+下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png">
 
 
 
@@ -112,7 +119,7 @@
   };
 </script>
 
-  <title> 标签: Java | WEIQIANGHU BLOG </title>
+  <title> 利用责任链模式实现加载不同来源的数据 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,7 +140,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,74 +248,133 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Java
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/15/Java中的I-O/" itemprop="url">
-              
-                <span itemprop="name">Java中的I/O</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-15T09:14:22+08:00"
-              content="2016-06-15" >
-          06-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/01/Java中的重载/" itemprop="url">
-              
-                <span itemprop="name">Java中的重载</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-01T10:07:26+08:00"
-              content="2016-06-01" >
-          06-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用责任链模式实现加载不同来源的数据
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T16:09:07+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/14/利用责任链模式实现加载不同来源的数据/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/14/利用责任链模式实现加载不同来源的数据/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="责任链模式简单介绍"><a href="#责任链模式简单介绍" class="headerlink" title="责任链模式简单介绍"></a>责任链模式简单介绍</h2><p>首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。<br><img src="/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png" alt="index.png" title=""></p>
+<p>下面简单介绍一下图中的角色。<br>Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。<br>ConcreteHandler是Handler的具体实现。<br>责任链模式的具体实现这里就不做介绍了，大家可以通过其他途径了解。下面就是我们项目中的应用了。</p>
+<h2 id="项目中的具体实现"><a href="#项目中的具体实现" class="headerlink" title="项目中的具体实现"></a>项目中的具体实现</h2><p>我们的需求可以由下面的流程图来概括。要实现这样的需求我们应该怎么做呢？if，else太low，这就是我们的责任链模式的用武之地。<br><img src="/2016/07/14/利用责任链模式实现加载不同来源的数据/flow.png" alt="flow.png" title=""></p>
+<p>首先是handler的定义，如下：</p>
+<p>以上就是我们利用责任链模式实现从多个来源请求数据的示例！全部代码可去<a href="https://github.com/Weiqianghu/DryGoodsCamp" target="_blank" rel="external">这里</a>查看。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-设计模式-Java/" rel="tag">#Android 设计模式 Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/05/ToolBar修改右侧三个点的颜色/" rel="next" title="ToolBar修改右侧三个点的颜色">
+                <i class="fa fa-chevron-left"></i> ToolBar修改右侧三个点的颜色
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -316,6 +382,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/14/利用责任链模式实现加载不同来源的数据/"
+           data-title="利用责任链模式实现加载不同来源的数据" data-url="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -335,8 +409,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
@@ -386,6 +469,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#责任链模式简单介绍"><span class="nav-number">1.</span> <span class="nav-text">责任链模式简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中的具体实现"><span class="nav-number">2.</span> <span class="nav-text">项目中的具体实现</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -482,6 +576,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

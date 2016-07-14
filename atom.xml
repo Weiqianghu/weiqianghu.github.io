@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-07-05T10:33:49.836Z</updated>
+  <updated>2016-07-14T10:22:47.909Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用责任链模式实现加载不同来源的数据</title>
+    <link href="http://weiqianghu.github.io/2016/07/14/%E5%88%A9%E7%94%A8%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%90%8C%E6%9D%A5%E6%BA%90%E7%9A%84%E6%95%B0%E6%8D%AE/"/>
+    <id>http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/</id>
+    <published>2016-07-14T08:09:07.000Z</published>
+    <updated>2016-07-14T10:22:47.909Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;责任链模式简单介绍&quot;&gt;&lt;a href=&quot;#责任链模式简单介绍&quot; class=&quot;headerlink&quot; title=&quot;责任链模式简单介绍&quot;&gt;&lt;/a&gt;责任链模式简单介绍&lt;/h2&gt;&lt;p&gt;首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。&lt;br&gt;&lt;img src=&quot;/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png&quot; alt=&quot;index.png&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;下面简单介绍一下图中的角色。&lt;br&gt;Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。&lt;br&gt;ConcreteHandler是Handler的具体实现。&lt;br&gt;责任链模式的具体实现这里就不做介绍了，大家可以通过其他途径了解。下面就是我们项目中的应用了。&lt;/p&gt;
+&lt;h2 id=&quot;项目中的具体实现&quot;&gt;&lt;a href=&quot;#项目中的具体实现&quot; class=&quot;headerlink&quot; title=&quot;项目中的具体实现&quot;&gt;&lt;/a&gt;项目中的具体实现&lt;/h2&gt;&lt;p&gt;我们的需求可以由下面的流程图来概括。要实现这样的需求我们应该怎么做呢？if，else太low，这就是我们的责任链模式的用武之地。&lt;br&gt;&lt;img src=&quot;/2016/07/14/利用责任链模式实现加载不同来源的数据/flow.png&quot; alt=&quot;flow.png&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;首先是handler的定义，如下：&lt;/p&gt;
+&lt;p&gt;以上就是我们利用责任链模式实现从多个来源请求数据的示例！全部代码可去&lt;a href=&quot;https://github.com/Weiqianghu/DryGoodsCamp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;查看。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;责任链模式简单介绍&quot;&gt;&lt;a href=&quot;#责任链模式简单介绍&quot; class=&quot;headerlink&quot; title=&quot;责任链模式简单介绍&quot;&gt;&lt;/a&gt;责任链模式简单介绍&lt;/h2&gt;&lt;p&gt;首先简单介绍一下责任链模式，责任链模式的思想及其
+    
+    </summary>
+    
+    
+      <category term="Android 设计模式 Java" scheme="http://weiqianghu.github.io/tags/Android-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-Java/"/>
+    
+  </entry>
   
   <entry>
     <title>ToolBar修改右侧三个点的颜色</title>
