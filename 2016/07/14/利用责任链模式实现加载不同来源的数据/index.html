@@ -86,21 +86,18 @@
 
 
 
-<meta name="description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
-下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta name="description" content="在软件工程中，设计模式(design pattern)是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案。责任链模式是一种对象的行为模式，在责任链模式中每个对象及其下家的引用而形成一条链，请求在这个链式传递，直到链上的某个对象处理此请求。责任链模式非常适合移动端先从内存中加载数据，如果内存中没有则去硬盘中加载，最后再通过网络加载数据，这篇文章将介绍利用责任链模式来解决这个问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用责任链模式实现加载不同来源的数据">
 <meta property="og:url" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
-下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta property="og:description" content="在软件工程中，设计模式(design pattern)是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案。责任链模式是一种对象的行为模式，在责任链模式中每个对象及其下家的引用而形成一条链，请求在这个链式传递，直到链上的某个对象处理此请求。责任链模式非常适合移动端先从内存中加载数据，如果内存中没有则去硬盘中加载，最后再通过网络加载数据，这篇文章将介绍利用责任链模式来解决这个问题。">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/flow.png">
-<meta property="og:updated_time" content="2016-07-14T10:22:47.909Z">
+<meta property="og:updated_time" content="2016-07-14T10:24:58.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用责任链模式实现加载不同来源的数据">
-<meta name="twitter:description" content="责任链模式简单介绍首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。
-下面简单介绍一下图中的角色。Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。ConcreteHandler是Handler的具体实现。责任链模式的具体实现这里">
+<meta name="twitter:description" content="在软件工程中，设计模式(design pattern)是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案。责任链模式是一种对象的行为模式，在责任链模式中每个对象及其下家的引用而形成一条链，请求在这个链式传递，直到链上的某个对象处理此请求。责任链模式非常适合移动端先从内存中加载数据，如果内存中没有则去硬盘中加载，最后再通过网络加载数据，这篇文章将介绍利用责任链模式来解决这个问题。">
 <meta name="twitter:image" content="http://weiqianghu.github.io/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png">
 
 
@@ -316,7 +313,8 @@
       
 
       
-        <a id="more"></a>
+        <p>在软件工程中，设计模式(design pattern)是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案。<br>责任链模式是一种对象的行为模式，在责任链模式中每个对象及其下家的引用而形成一条链，请求在这个链式传递，直到链上的某个对象处理此请求。责任链模式非常适合移动端先从内存中加载数据，如果内存中没有则去硬盘中加载，最后再通过网络加载数据，这篇文章将介绍利用责任链模式来解决这个问题。</p>
+<a id="more"></a>
 <h2 id="责任链模式简单介绍"><a href="#责任链模式简单介绍" class="headerlink" title="责任链模式简单介绍"></a>责任链模式简单介绍</h2><p>首先简单介绍一下责任链模式，责任链模式的思想及其作用在前面已经介绍过了，这里首先通过下图对责任链模式做个简单了解。<br><img src="/2016/07/14/利用责任链模式实现加载不同来源的数据/index.png" alt="index.png" title=""></p>
 <p>下面简单介绍一下图中的角色。<br>Handler：处理请求的接口，可以由接口或抽象类来实现。在Handler中handleRequest是处理请求的方法，successor是其的下家引用。<br>ConcreteHandler是Handler的具体实现。<br>责任链模式的具体实现这里就不做介绍了，大家可以通过其他途径了解。下面就是我们项目中的应用了。</p>
 <h2 id="项目中的具体实现"><a href="#项目中的具体实现" class="headerlink" title="项目中的具体实现"></a>项目中的具体实现</h2><p>我们的需求可以由下面的流程图来概括。要实现这样的需求我们应该怎么做呢？if，else太low，这就是我们的责任链模式的用武之地。<br><img src="/2016/07/14/利用责任链模式实现加载不同来源的数据/flow.png" alt="flow.png" title=""></p>
