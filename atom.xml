@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-07-15T07:55:16.924Z</updated>
+  <updated>2016-07-15T07:57:45.977Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,24 +20,21 @@
     <link href="http://weiqianghu.github.io/2016/07/15/LruCache%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://weiqianghu.github.io/2016/07/15/LruCache源码解析/</id>
     <published>2016-07-15T03:19:33.000Z</published>
-    <updated>2016-07-15T07:55:16.924Z</updated>
+    <updated>2016-07-15T07:57:45.977Z</updated>
     
     <content type="html">&lt;p&gt;LruCache是Android在3.1提供的一个最近最少使用数据缓存算法工具类，本文将梳理一下LruCache的源码。首先我们看一下Android官方文档是怎么样描述LruCache的。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A cache that holds strong references to a limited number of values. Each time a value is accessed, it is moved to the head of a queue. When a value is added to a full cache, the value at the end of that queue is evicted and may become eligible for garbage collection. &lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;Cache对数量有限的Value持有强引用。每当访问一个Value的时候，它都会被移动到队列的头部。当往已满的cache中加入新内容时，在队列尾部的内容会被当作垃圾删除。这就是LruCache中LRU（最近最少使用算法）算法的实现原理。&lt;br&gt;下面先看一下，LruCache官方文档。&lt;/p&gt;
+&lt;p&gt;Cache对数量有限的Value持有强引用。每当访问一个Value的时候，它都会被移动到队列的头部。当往已满的cache中加入新内容时，在队列尾部的内容会被当作垃圾删除。这就是LruCache中LRU（最近最少使用算法）算法的实现原理。&lt;br&gt;下面先看一下，LruCache官方文档对LruCache的介绍。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If your cached values hold resources that need to be explicitly released, override entryRemoved(boolean, K, V, V).&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;If a cache miss should be computed on demand for the corresponding keys, override create(K). This simplifies the calling code, allowing it to assume a value will always be returned, even when there’s a cache miss.&lt;/p&gt;
-&lt;p&gt;By default, the cache size is measured in the number of entries. Override sizeOf(K, V) to size the cache in different units. For example, this cache is limited to 4MiB of bitmaps:&lt;/p&gt;
-&lt;p&gt;   int cacheSize = 4 &lt;em&gt; 1024 &lt;/em&gt; 1024; // 4MiB&lt;br&gt;   LruCache&lt;string, bitmap=&quot;&quot;&gt; bitmapCache = new LruCache&lt;string, bitmap=&quot;&quot;&gt;(cacheSize) {&lt;br&gt;       protected int sizeOf(String key, Bitmap value) {&lt;br&gt;           return value.getByteCount();&lt;br&gt;       }&lt;br&gt;   }&lt;/string,&gt;&lt;/string,&gt;&lt;/p&gt;
-&lt;p&gt;This class is thread-safe. Perform multiple cache operations atomically by synchronizing on the cache:&lt;/p&gt;
-&lt;p&gt;   synchronized (cache) {&lt;br&gt;     if (cache.get(key) == null) {&lt;br&gt;         cache.put(key, value);&lt;br&gt;     }&lt;br&gt;   }&lt;/p&gt;
-&lt;p&gt;This class does not allow null to be used as a key or value. A return value of null from get(K), put(K, V) or remove(K) is unambiguous: the key was not in the cache.&lt;/p&gt;
+&lt;p&gt;By default, the cache size is measured in the number of entries. Override sizeOf(K, V) to size the cache in different units. For example, this cache is limited to 4MiB of bitmaps:&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; cacheSize = &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;// 4MiB&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;LruCache&amp;lt;String, Bitmap&amp;gt; bitmapCache = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LruCache&amp;lt;String, Bitmap&amp;gt;(cacheSize) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;sizeOf&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String key, Bitmap value)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; value.getByteCount();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;This class is thread-safe. Perform multiple cache operations atomically by synchronizing on the cache:&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (cache) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (cache.get(key) == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cache.put(key, value);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;br&gt;This class does not allow null to be used as a key or value. A return value of null from get(K), put(K, V) or remove(K) is unambiguous: the key was not in the cache.&lt;/p&gt;
 &lt;p&gt;This class appeared in Android 3.1 (Honeycomb MR1); it’s available as part of Android’s Support Package for earlier releases. &lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
