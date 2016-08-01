@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-08-01T08:31:12.709Z</updated>
+  <updated>2016-08-01T08:34:37.502Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://weiqianghu.github.io/2016/08/01/Android-Studio-AIDL-%E5%AE%9E%E6%88%98/"/>
     <id>http://weiqianghu.github.io/2016/08/01/Android-Studio-AIDL-实战/</id>
     <published>2016-08-01T06:07:42.000Z</published>
-    <updated>2016-08-01T08:31:12.709Z</updated>
+    <updated>2016-08-01T08:34:37.502Z</updated>
     
     <content type="html">&lt;p&gt;AIDL是Android Interface Definition Language 的缩写，即Android 接口定义语言。那么AIDL到底是干什么用的呢？简单的说AIDL就是用来进行进程间通信的 ，可是Android已经有了Messenger、ContentProvider、Socket等进程间通信方式，那么我们为什么还需要AIDL呢？以及我们什么时候应该使用AIDL呢？ 其实这 两个问题的答案可以在Android官方文档中找到，在Android的官方文档中有下面的描述：&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: Using AIDL is necessary only if you allow clients from different applications to access your service for IPC and want to handle&lt;br&gt;multithreading in your service. If you do not need to perform concurrent IPC across different applications, you should create your&lt;br&gt;interface by implementing a Binder or, if you want to perform IPC, but do not need to handle multithreading, implement your interface&lt;br&gt;using a Messenger. Regardless, be sure that you understand Bound Services before implementing an AIDL.&lt;/p&gt;
+&lt;p&gt;Note: Using AIDL is necessary only if you allow clients from different applications to access your service for IPC and want to handle multithreading in your service. If you do not need to perform concurrent IPC across different applications, you should create your interface by implementing a Binder or, if you want to perform IPC, but do not need to handle multithreading, implement your interface using a Messenger. Regardless, be sure that you understand Bound Services before implementing an AIDL.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;只有需要多个不同App通过IPC访问服务而且还需要在服务中处理多线程时才应该使用AIDL。从这里我们应该明白了为什么要使用AIDL，以及什么时候使用AIDL。&lt;/p&gt;
 &lt;h2 id=&quot;AIDL实战&quot;&gt;&lt;a href=&quot;#AIDL实战&quot; class=&quot;headerlink&quot; title=&quot;AIDL实战&quot;&gt;&lt;/a&gt;AIDL实战&lt;/h2&gt;&lt;p&gt;简单的了解了AIDL之后，接下来我们将通过一个简单的示例演示一下AIDL的使用。&lt;/p&gt;
