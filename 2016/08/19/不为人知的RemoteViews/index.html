@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://weiqianghu.github.io/2016/08/19/不为人知的RemoteViews/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
 <meta property="og:description" content="可能标题党了，应该是我们在日常开发中很少会接触到它，这篇文章将首先介绍一下 RemoteViews 在通知栏和桌面小部件的的应用，然后会分析 RemoteViews 的内部机制。那么什么是 RemoteViews 呢？ RemoteViews 表示的是一个 View 的结构，它的功能就是用来跨进程更新界面，主要的应用就是桌面小组件和通知栏。RemoteViews 在实际开发中主要应用在通知栏和桌面">
-<meta property="og:updated_time" content="2016-08-22T08:07:20.416Z">
+<meta property="og:updated_time" content="2016-08-22T09:18:41.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不为人知的 RemoteViews">
 <meta name="twitter:description" content="可能标题党了，应该是我们在日常开发中很少会接触到它，这篇文章将首先介绍一下 RemoteViews 在通知栏和桌面小部件的的应用，然后会分析 RemoteViews 的内部机制。那么什么是 RemoteViews 呢？ RemoteViews 表示的是一个 View 的结构，它的功能就是用来跨进程更新界面，主要的应用就是桌面小组件和通知栏。RemoteViews 在实际开发中主要应用在通知栏和桌面">
@@ -325,7 +325,9 @@
 <h2 id="PendingIntent-简述"><a href="#PendingIntent-简述" class="headerlink" title="PendingIntent 简述"></a>PendingIntent 简述</h2><p>PendingIntent 表示接下来在某个特定时刻有一个 Intent 发生。PendingIntent 的典型使用场景就是给 RemoteViews 添加点击事件。PendingIntent 可以启动 Activity ， 发送广播，启动 Service。</p>
 <h2 id="RemoteViews-的内部机制"><a href="#RemoteViews-的内部机制" class="headerlink" title="RemoteViews 的内部机制"></a>RemoteViews 的内部机制</h2><p>RemoteViews 的作用是在其他进程中显示并更新 View 界面。</p>
 <h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p>public RemoteViews(String packageName, int layoutId); 它接受两个参数，第一个表示当前应用的包名，第二个表示待加载的布局文件。其中布局文件支持的 Layout 有： FrameLayout 、 LinearLayout 、 RelativeLayout 、 GridLayout。 支持的常见 View 有：Button、ImageButton、ImageView、ProgressBar、TextView、ListView 、 GridView、ViewStub。RemoteViews不支持它们的子类以及其他View类型，当然不能支持自定义View。由于 RemoteView 在远程进程中显示所有不能直接利用 findViewById 方法进行访问，所有只能使用 RemoteViews 提供的一系列set方法，RemoteViews 提供的set方法使用比较简单，关于 RemoteViews 提供的具体set 方法大家可以查询相关资料。</p>
-<h4 id="RemoteViews-的内部机制-1"><a href="#RemoteViews-的内部机制-1" class="headerlink" title="RemoteViews 的内部机制"></a>RemoteViews 的内部机制</h4>
+<h4 id="RemoteViews-的内部机制-1"><a href="#RemoteViews-的内部机制-1" class="headerlink" title="RemoteViews 的内部机制"></a>RemoteViews 的内部机制</h4><p>由于 RemoteViews 主要应用于桌面小组件和通知栏，因此我们也通过它们分析 RemoteViews 的内部机制。通知栏和桌面小部件分别由 NotificationManager 和 AppWidgetManager 管理，而 NotificationManager 和 AppWidgetManager 通过 Binder 分别和 SystemServer 进程中的 NotificationManagerService 以及 AppWidgetService 进行通信。<br>首先 RemoteViews 会通过 Binder 传递到 SystemServer 进程，系统会根据 RemoteViews 中的包名等信息去得到应用的资源，然后会通过 LayoutInflater 去加载 RemoteViews 的布局文件，对于 SystemServer 进程来说近加载后的布局文件就是一个普通的view，接着系统会根据 set 方法提交的更新任务去更新界面，其中之前利用 set 方法提交任务的时候并不是立刻执行，而是记录在了 RemoteViews 内部，其中任务是用 Action 封装的。这就是 RemoteViews 的内部机制，更详细的内容可以查阅相关源码。</p>
+<p>参考资料：<br>Android 开发艺术探索 理解 RemoteViews</p>
+
       
     </div>
 
