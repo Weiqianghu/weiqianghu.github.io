@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Android 动画," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。">
+<meta name="description" content="Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android—_Studio常用快捷键">
-<meta property="og:url" content="http://weiqianghu.github.io/2016/05/31/Android—-Studio常用快捷键/index.html">
+<meta property="og:title" content="Android 动画分析">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/08/23/Android-动画分析/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。">
-<meta property="og:image" content="http://weiqianghu.github.io/2016/05/31/Android—-Studio常用快捷键/Android_Studio.png">
-<meta property="og:updated_time" content="2016-06-16T01:05:23.366Z">
+<meta property="og:description" content="Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/08/23/Android-动画分析/view_group.gif">
+<meta property="og:updated_time" content="2016-08-23T06:16:15.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android—_Studio常用快捷键">
-<meta name="twitter:description" content="Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。">
-<meta name="twitter:image" content="http://weiqianghu.github.io/2016/05/31/Android—-Studio常用快捷键/Android_Studio.png">
+<meta name="twitter:title" content="Android 动画分析">
+<meta name="twitter:description" content="Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/08/23/Android-动画分析/view_group.gif">
 
 
 
@@ -115,7 +115,7 @@
   };
 </script>
 
-  <title> Android—_Studio常用快捷键 | WEIQIANGHU BLOG </title>
+  <title> Android 动画分析 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +265,7 @@
             
             
               
-                Android—_Studio常用快捷键
+                Android 动画分析
               
             
           </h1>
@@ -277,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-31T14:37:49+08:00" content="2016-05-31">
-              2016-05-31
+            <time itemprop="dateCreated" datetime="2016-08-23T10:38:10+08:00" content="2016-08-23">
+              2016-08-23
             </time>
           </span>
 
@@ -288,8 +288,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/31/Android—-Studio常用快捷键/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/Android—-Studio常用快捷键/" itemprop="commentsCount"></span>
+                <a href="/2016/08/23/Android-动画分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/23/Android-动画分析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,15 +312,15 @@
       
 
       
-        <p>  Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。</p>
+        <p>Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。</p>
 <a id="more"></a>
-<p>Ctrl+Alt+L：格式化代码</p>
-<h2 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h2><p>logt:直接打logt自动生成TAG<br>logd,logm,loge:生成log</p>
-<h2 id="代码移动"><a href="#代码移动" class="headerlink" title="代码移动"></a>代码移动</h2><p>Ctrl+W: 选中代码，连续按会改变选中范围<br>Ctrl+Shift+方向键：代码移动<br>Ctrl+D:复制当前行到小一行<br>Alt+Up/Down:在类中的方法间移动</p>
-<h2 id="代码查看"><a href="#代码查看" class="headerlink" title="代码查看"></a>代码查看</h2><p>Ctrl+Shift+N：打开一个文件<br>Ctrl+N：打开一个类<br>Ctrl+Alt+Shift+N：查找类中的方法或变量<br>Ctrl+U:查看一个类的父类<br>Ctrl+Alt+H：查看一个方法的调用<br>Ctrl+Shift+I：在类中查看方法的实现<br>Ctrl+H：查看类的结构<br>Ctrl+Alt+Left：代码返回<br>Alt+左右方向键：切换窗口<br>Alt+1：打开或关闭工程面板<br>Ctrl+F12：显示当前文件的结构<br>Ctrl+O：复写父类的方法<br>Ctrl+Alt+T：选中一块代码之后，利用此键可快速添加模板代码</p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>Ctrl+J：可以生成很多模板代码</p>
-<h2 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h2><p>Ctrl+R：查找 替换<br>Ctrl+F：查找文件<br>Ctrl+E：打开最近的文件</p>
-<img src="/2016/05/31/Android—-Studio常用快捷键/Android_Studio.png" alt="Android_Studio.png" title="">
+<h3 id="View-动画"><a href="#View-动画" class="headerlink" title="View 动画"></a>View 动画</h3><p>View 动画的作用对象是 View ，它支持四种动画效果分别是平移动画、缩放动画、旋转动画、透明度动画。</p>
+<h4 id="View-动画的简单示例"><a href="#View-动画的简单示例" class="headerlink" title="View 动画的简单示例"></a>View 动画的简单示例</h4><p>下面是 View 动画的一个简单示例：</p>
+<p>可以看到 View 动画的使用非常简单，上面是一个 View 动画的集合，其中应用到了 平移动画、缩放动画、旋转动画、透明度动画。其中属性都比较简单，但是要注意的是缩放动画和旋转动画中有轴点的概念，在缩放动画中轴点就是缩放的中心点，在旋转动画中轴点就是旋转的中心点，在默认情况下轴点都是 View 的中心点。 View 动画既可以使用 XML 方式定义也可以用代码直接应用动画，但是对于 View 动画还是建议使用 XML 的方式，这样可读性更好，使用更方便。</p>
+<h4 id="View-动画的使用场景"><a href="#View-动画的使用场景" class="headerlink" title="View 动画的使用场景"></a>View 动画的使用场景</h4><p>View 动画除了可以直接作用于 View 之外还有一些特殊的使用场景比如：ViewGroup 的子元素的出场效果、 Activity 和 Fragment 的切换效果等。这一节将会介绍 View 动画的 特殊使用场景。</p>
+<h5 id="LayoutAnimation"><a href="#LayoutAnimation" class="headerlink" title="LayoutAnimation"></a>LayoutAnimation</h5><p>LayoutAnimation 作用于 ViewGroup ，为 ViewGroup 指定了 LayoutAnimation 后， ViewGroup 的子元素就具有了这种出场效果。</p>
+<h6 id="定义-LayoutAnimation"><a href="#定义-LayoutAnimation" class="headerlink" title="定义 LayoutAnimation"></a>定义 LayoutAnimation</h6><p>其中的 delay 属性表示前一个项目的动画播放一半之后就进行播放下一个项目的动画。</p>
+<h6 id="为子元素指定具体的入场动画"><a href="#为子元素指定具体的入场动画" class="headerlink" title="为子元素指定具体的入场动画"></a>为子元素指定具体的入场动画</h6><h6 id="为-ViewGroup-指定-LayoutAnimation"><a href="#为-ViewGroup-指定-LayoutAnimation" class="headerlink" title="为 ViewGroup 指定 LayoutAnimation"></a>为 ViewGroup 指定 LayoutAnimation</h6><p>通过这几部就指定了 ListView item 的进入动画，最后效果如下所示：<br><img src="/2016/08/23/Android-动画分析/view_group.gif" alt="view_group.gif" title=""></p>
 
       
     </div>
@@ -342,7 +342,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Android-动画/" rel="tag">#Android 动画</a>
           
         </div>
       
@@ -351,17 +351,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/27/给TextView个别字设置点击事件和颜色/" rel="next" title="给TextView个别字设置点击事件和颜色">
-                <i class="fa fa-chevron-left"></i> 给TextView个别字设置点击事件和颜色
+              <a href="/2016/08/19/不为人知的RemoteViews/" rel="next" title="不为人知的 RemoteViews">
+                <i class="fa fa-chevron-left"></i> 不为人知的 RemoteViews
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/01/Java中的重载/" rel="prev" title="Java中的重载">
-                Java中的重载 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -387,8 +383,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/31/Android—-Studio常用快捷键/"
-           data-title="Android—_Studio常用快捷键" data-url="http://weiqianghu.github.io/2016/05/31/Android—-Studio常用快捷键/">
+      <div class="ds-thread" data-thread-key="2016/08/23/Android-动画分析/"
+           data-title="Android 动画分析" data-url="http://weiqianghu.github.io/2016/08/23/Android-动画分析/">
       </div>
     
   </div>
@@ -479,7 +475,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Log"><span class="nav-number">1.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码移动"><span class="nav-number">2.</span> <span class="nav-text">代码移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码查看"><span class="nav-number">3.</span> <span class="nav-text">代码查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码生成"><span class="nav-number">4.</span> <span class="nav-text">代码生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找和替换"><span class="nav-number">5.</span> <span class="nav-text">查找和替换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-动画"><span class="nav-number">1.</span> <span class="nav-text">View 动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#View-动画的简单示例"><span class="nav-number">1.1.</span> <span class="nav-text">View 动画的简单示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View-动画的使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">View 动画的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#LayoutAnimation"><span class="nav-number">1.2.1.</span> <span class="nav-text">LayoutAnimation</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义-LayoutAnimation"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">定义 LayoutAnimation</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为子元素指定具体的入场动画"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">为子元素指定具体的入场动画</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为-ViewGroup-指定-LayoutAnimation"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">为 ViewGroup 指定 LayoutAnimation</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
