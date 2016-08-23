@@ -422,11 +422,11 @@ C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
   </entry>
   
   <entry>
-    <title>Android—_Studio常用快捷键</title>
+    <title>Android Studio常用快捷键</title>
     <link href="http://weiqianghu.github.io/2016/05/31/Android-Studio%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://weiqianghu.github.io/2016/05/31/Android-Studio常用快捷键/</id>
     <published>2016-05-31T06:37:49.000Z</published>
-    <updated>2016-06-16T01:05:23.366Z</updated>
+    <updated>2016-08-23T08:12:22.674Z</updated>
     
     <content type="html">&lt;p&gt;  Android Studio 是我们日常开发中使用的最多的工具，掌握了Android Studio的快捷键对于提高我们的开发效率具有很高的作用。这篇文章将介绍一些常用的Android studio快捷键。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -436,7 +436,7 @@ C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
 &lt;h2 id=&quot;代码查看&quot;&gt;&lt;a href=&quot;#代码查看&quot; class=&quot;headerlink&quot; title=&quot;代码查看&quot;&gt;&lt;/a&gt;代码查看&lt;/h2&gt;&lt;p&gt;Ctrl+Shift+N：打开一个文件&lt;br&gt;Ctrl+N：打开一个类&lt;br&gt;Ctrl+Alt+Shift+N：查找类中的方法或变量&lt;br&gt;Ctrl+U:查看一个类的父类&lt;br&gt;Ctrl+Alt+H：查看一个方法的调用&lt;br&gt;Ctrl+Shift+I：在类中查看方法的实现&lt;br&gt;Ctrl+H：查看类的结构&lt;br&gt;Ctrl+Alt+Left：代码返回&lt;br&gt;Alt+左右方向键：切换窗口&lt;br&gt;Alt+1：打开或关闭工程面板&lt;br&gt;Ctrl+F12：显示当前文件的结构&lt;br&gt;Ctrl+O：复写父类的方法&lt;br&gt;Ctrl+Alt+T：选中一块代码之后，利用此键可快速添加模板代码&lt;/p&gt;
 &lt;h2 id=&quot;代码生成&quot;&gt;&lt;a href=&quot;#代码生成&quot; class=&quot;headerlink&quot; title=&quot;代码生成&quot;&gt;&lt;/a&gt;代码生成&lt;/h2&gt;&lt;p&gt;Ctrl+J：可以生成很多模板代码&lt;/p&gt;
 &lt;h2 id=&quot;查找和替换&quot;&gt;&lt;a href=&quot;#查找和替换&quot; class=&quot;headerlink&quot; title=&quot;查找和替换&quot;&gt;&lt;/a&gt;查找和替换&lt;/h2&gt;&lt;p&gt;Ctrl+R：查找 替换&lt;br&gt;Ctrl+F：查找文件&lt;br&gt;Ctrl+E：打开最近的文件&lt;/p&gt;
-
+&lt;img src=&quot;/2016/05/31/Android-Studio常用快捷键/Android_Studio.png&quot; alt=&quot;Android_Studio.png&quot; title=&quot;&quot;&gt;
 </content>
     
     <summary type="html">
