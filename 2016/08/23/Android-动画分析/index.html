@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
 <meta property="og:description" content="Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/08/23/Android-动画分析/view_group.gif">
-<meta property="og:updated_time" content="2016-08-23T06:16:15.242Z">
+<meta property="og:updated_time" content="2016-08-23T06:18:57.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 动画分析">
 <meta name="twitter:description" content="Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。">
@@ -314,13 +314,14 @@
       
         <p>Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。</p>
 <a id="more"></a>
-<h3 id="View-动画"><a href="#View-动画" class="headerlink" title="View 动画"></a>View 动画</h3><p>View 动画的作用对象是 View ，它支持四种动画效果分别是平移动画、缩放动画、旋转动画、透明度动画。</p>
-<h4 id="View-动画的简单示例"><a href="#View-动画的简单示例" class="headerlink" title="View 动画的简单示例"></a>View 动画的简单示例</h4><p>下面是 View 动画的一个简单示例：</p>
+<h2 id="View-动画"><a href="#View-动画" class="headerlink" title="View 动画"></a>View 动画</h2><p>View 动画的作用对象是 View ，它支持四种动画效果分别是平移动画、缩放动画、旋转动画、透明度动画。</p>
+<h3 id="View-动画的简单示例"><a href="#View-动画的简单示例" class="headerlink" title="View 动画的简单示例"></a>View 动画的简单示例</h3><p>下面是 View 动画的一个简单示例：</p>
 <p>可以看到 View 动画的使用非常简单，上面是一个 View 动画的集合，其中应用到了 平移动画、缩放动画、旋转动画、透明度动画。其中属性都比较简单，但是要注意的是缩放动画和旋转动画中有轴点的概念，在缩放动画中轴点就是缩放的中心点，在旋转动画中轴点就是旋转的中心点，在默认情况下轴点都是 View 的中心点。 View 动画既可以使用 XML 方式定义也可以用代码直接应用动画，但是对于 View 动画还是建议使用 XML 的方式，这样可读性更好，使用更方便。</p>
-<h4 id="View-动画的使用场景"><a href="#View-动画的使用场景" class="headerlink" title="View 动画的使用场景"></a>View 动画的使用场景</h4><p>View 动画除了可以直接作用于 View 之外还有一些特殊的使用场景比如：ViewGroup 的子元素的出场效果、 Activity 和 Fragment 的切换效果等。这一节将会介绍 View 动画的 特殊使用场景。</p>
-<h5 id="LayoutAnimation"><a href="#LayoutAnimation" class="headerlink" title="LayoutAnimation"></a>LayoutAnimation</h5><p>LayoutAnimation 作用于 ViewGroup ，为 ViewGroup 指定了 LayoutAnimation 后， ViewGroup 的子元素就具有了这种出场效果。</p>
-<h6 id="定义-LayoutAnimation"><a href="#定义-LayoutAnimation" class="headerlink" title="定义 LayoutAnimation"></a>定义 LayoutAnimation</h6><p>其中的 delay 属性表示前一个项目的动画播放一半之后就进行播放下一个项目的动画。</p>
-<h6 id="为子元素指定具体的入场动画"><a href="#为子元素指定具体的入场动画" class="headerlink" title="为子元素指定具体的入场动画"></a>为子元素指定具体的入场动画</h6><h6 id="为-ViewGroup-指定-LayoutAnimation"><a href="#为-ViewGroup-指定-LayoutAnimation" class="headerlink" title="为 ViewGroup 指定 LayoutAnimation"></a>为 ViewGroup 指定 LayoutAnimation</h6><p>通过这几部就指定了 ListView item 的进入动画，最后效果如下所示：<br><img src="/2016/08/23/Android-动画分析/view_group.gif" alt="view_group.gif" title=""></p>
+<h3 id="View-动画的使用场景"><a href="#View-动画的使用场景" class="headerlink" title="View 动画的使用场景"></a>View 动画的使用场景</h3><p>View 动画除了可以直接作用于 View 之外还有一些特殊的使用场景比如：ViewGroup 的子元素的出场效果、 Activity 和 Fragment 的切换效果等。这一节将会介绍 View 动画的 特殊使用场景。</p>
+<h4 id="LayoutAnimation"><a href="#LayoutAnimation" class="headerlink" title="LayoutAnimation"></a>LayoutAnimation</h4><p>LayoutAnimation 作用于 ViewGroup ，为 ViewGroup 指定了 LayoutAnimation 后， ViewGroup 的子元素就具有了这种出场效果。</p>
+<h5 id="定义-LayoutAnimation"><a href="#定义-LayoutAnimation" class="headerlink" title="定义 LayoutAnimation"></a>定义 LayoutAnimation</h5><p>其中的 delay 属性表示前一个项目的动画播放一半之后就进行播放下一个项目的动画。</p>
+<h5 id="为子元素指定具体的入场动画"><a href="#为子元素指定具体的入场动画" class="headerlink" title="为子元素指定具体的入场动画"></a>为子元素指定具体的入场动画</h5><h5 id="为-ViewGroup-指定-LayoutAnimation"><a href="#为-ViewGroup-指定-LayoutAnimation" class="headerlink" title="为 ViewGroup 指定 LayoutAnimation"></a>为 ViewGroup 指定 LayoutAnimation</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ListView</span></span><br><span class="line">       <span class="attr">android:id</span>=<span class="string">"@+id/lv_test"</span></span><br><span class="line">       <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span><br><span class="line">       <span class="attr">android:layoutAnimation</span>=<span class="string">"@anim/anim_layout"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">ListView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过这几部就指定了 ListView item 的进入动画，最后效果如下所示：<br><img src="/2016/08/23/Android-动画分析/view_group.gif" alt="view_group.gif" title=""></p>
 
       
     </div>
@@ -475,7 +476,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-动画"><span class="nav-number">1.</span> <span class="nav-text">View 动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#View-动画的简单示例"><span class="nav-number">1.1.</span> <span class="nav-text">View 动画的简单示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View-动画的使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">View 动画的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#LayoutAnimation"><span class="nav-number">1.2.1.</span> <span class="nav-text">LayoutAnimation</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义-LayoutAnimation"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">定义 LayoutAnimation</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为子元素指定具体的入场动画"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">为子元素指定具体的入场动画</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#为-ViewGroup-指定-LayoutAnimation"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">为 ViewGroup 指定 LayoutAnimation</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View-动画"><span class="nav-number">1.</span> <span class="nav-text">View 动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-动画的简单示例"><span class="nav-number">1.1.</span> <span class="nav-text">View 动画的简单示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View-动画的使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">View 动画的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LayoutAnimation"><span class="nav-number">1.2.1.</span> <span class="nav-text">LayoutAnimation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义-LayoutAnimation"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">定义 LayoutAnimation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为子元素指定具体的入场动画"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">为子元素指定具体的入场动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为-ViewGroup-指定-LayoutAnimation"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">为 ViewGroup 指定 LayoutAnimation</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

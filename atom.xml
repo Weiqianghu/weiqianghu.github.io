@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-08-23T06:16:15.242Z</updated>
+  <updated>2016-08-23T06:18:57.082Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,17 +20,18 @@
     <link href="http://weiqianghu.github.io/2016/08/23/Android-%E5%8A%A8%E7%94%BB%E5%88%86%E6%9E%90/"/>
     <id>http://weiqianghu.github.io/2016/08/23/Android-动画分析/</id>
     <published>2016-08-23T02:38:10.000Z</published>
-    <updated>2016-08-23T06:16:15.242Z</updated>
+    <updated>2016-08-23T06:18:57.082Z</updated>
     
     <content type="html">&lt;p&gt;Android 的动画分为三种：View 动画、帧动画和属性动画，这篇文章主要讲解 View 动画和属性动画的使用方法、插值器和估值器的原理，最后会介绍使用动画的一些注意事项。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h3 id=&quot;View-动画&quot;&gt;&lt;a href=&quot;#View-动画&quot; class=&quot;headerlink&quot; title=&quot;View 动画&quot;&gt;&lt;/a&gt;View 动画&lt;/h3&gt;&lt;p&gt;View 动画的作用对象是 View ，它支持四种动画效果分别是平移动画、缩放动画、旋转动画、透明度动画。&lt;/p&gt;
-&lt;h4 id=&quot;View-动画的简单示例&quot;&gt;&lt;a href=&quot;#View-动画的简单示例&quot; class=&quot;headerlink&quot; title=&quot;View 动画的简单示例&quot;&gt;&lt;/a&gt;View 动画的简单示例&lt;/h4&gt;&lt;p&gt;下面是 View 动画的一个简单示例：&lt;/p&gt;
+&lt;h2 id=&quot;View-动画&quot;&gt;&lt;a href=&quot;#View-动画&quot; class=&quot;headerlink&quot; title=&quot;View 动画&quot;&gt;&lt;/a&gt;View 动画&lt;/h2&gt;&lt;p&gt;View 动画的作用对象是 View ，它支持四种动画效果分别是平移动画、缩放动画、旋转动画、透明度动画。&lt;/p&gt;
+&lt;h3 id=&quot;View-动画的简单示例&quot;&gt;&lt;a href=&quot;#View-动画的简单示例&quot; class=&quot;headerlink&quot; title=&quot;View 动画的简单示例&quot;&gt;&lt;/a&gt;View 动画的简单示例&lt;/h3&gt;&lt;p&gt;下面是 View 动画的一个简单示例：&lt;/p&gt;
 &lt;p&gt;可以看到 View 动画的使用非常简单，上面是一个 View 动画的集合，其中应用到了 平移动画、缩放动画、旋转动画、透明度动画。其中属性都比较简单，但是要注意的是缩放动画和旋转动画中有轴点的概念，在缩放动画中轴点就是缩放的中心点，在旋转动画中轴点就是旋转的中心点，在默认情况下轴点都是 View 的中心点。 View 动画既可以使用 XML 方式定义也可以用代码直接应用动画，但是对于 View 动画还是建议使用 XML 的方式，这样可读性更好，使用更方便。&lt;/p&gt;
-&lt;h4 id=&quot;View-动画的使用场景&quot;&gt;&lt;a href=&quot;#View-动画的使用场景&quot; class=&quot;headerlink&quot; title=&quot;View 动画的使用场景&quot;&gt;&lt;/a&gt;View 动画的使用场景&lt;/h4&gt;&lt;p&gt;View 动画除了可以直接作用于 View 之外还有一些特殊的使用场景比如：ViewGroup 的子元素的出场效果、 Activity 和 Fragment 的切换效果等。这一节将会介绍 View 动画的 特殊使用场景。&lt;/p&gt;
-&lt;h5 id=&quot;LayoutAnimation&quot;&gt;&lt;a href=&quot;#LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;LayoutAnimation&quot;&gt;&lt;/a&gt;LayoutAnimation&lt;/h5&gt;&lt;p&gt;LayoutAnimation 作用于 ViewGroup ，为 ViewGroup 指定了 LayoutAnimation 后， ViewGroup 的子元素就具有了这种出场效果。&lt;/p&gt;
-&lt;h6 id=&quot;定义-LayoutAnimation&quot;&gt;&lt;a href=&quot;#定义-LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;定义 LayoutAnimation&quot;&gt;&lt;/a&gt;定义 LayoutAnimation&lt;/h6&gt;&lt;p&gt;其中的 delay 属性表示前一个项目的动画播放一半之后就进行播放下一个项目的动画。&lt;/p&gt;
-&lt;h6 id=&quot;为子元素指定具体的入场动画&quot;&gt;&lt;a href=&quot;#为子元素指定具体的入场动画&quot; class=&quot;headerlink&quot; title=&quot;为子元素指定具体的入场动画&quot;&gt;&lt;/a&gt;为子元素指定具体的入场动画&lt;/h6&gt;&lt;h6 id=&quot;为-ViewGroup-指定-LayoutAnimation&quot;&gt;&lt;a href=&quot;#为-ViewGroup-指定-LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;为 ViewGroup 指定 LayoutAnimation&quot;&gt;&lt;/a&gt;为 ViewGroup 指定 LayoutAnimation&lt;/h6&gt;&lt;p&gt;通过这几部就指定了 ListView item 的进入动画，最后效果如下所示：&lt;br&gt;&lt;img src=&quot;/2016/08/23/Android-动画分析/view_group.gif&quot; alt=&quot;view_group.gif&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;View-动画的使用场景&quot;&gt;&lt;a href=&quot;#View-动画的使用场景&quot; class=&quot;headerlink&quot; title=&quot;View 动画的使用场景&quot;&gt;&lt;/a&gt;View 动画的使用场景&lt;/h3&gt;&lt;p&gt;View 动画除了可以直接作用于 View 之外还有一些特殊的使用场景比如：ViewGroup 的子元素的出场效果、 Activity 和 Fragment 的切换效果等。这一节将会介绍 View 动画的 特殊使用场景。&lt;/p&gt;
+&lt;h4 id=&quot;LayoutAnimation&quot;&gt;&lt;a href=&quot;#LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;LayoutAnimation&quot;&gt;&lt;/a&gt;LayoutAnimation&lt;/h4&gt;&lt;p&gt;LayoutAnimation 作用于 ViewGroup ，为 ViewGroup 指定了 LayoutAnimation 后， ViewGroup 的子元素就具有了这种出场效果。&lt;/p&gt;
+&lt;h5 id=&quot;定义-LayoutAnimation&quot;&gt;&lt;a href=&quot;#定义-LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;定义 LayoutAnimation&quot;&gt;&lt;/a&gt;定义 LayoutAnimation&lt;/h5&gt;&lt;p&gt;其中的 delay 属性表示前一个项目的动画播放一半之后就进行播放下一个项目的动画。&lt;/p&gt;
+&lt;h5 id=&quot;为子元素指定具体的入场动画&quot;&gt;&lt;a href=&quot;#为子元素指定具体的入场动画&quot; class=&quot;headerlink&quot; title=&quot;为子元素指定具体的入场动画&quot;&gt;&lt;/a&gt;为子元素指定具体的入场动画&lt;/h5&gt;&lt;h5 id=&quot;为-ViewGroup-指定-LayoutAnimation&quot;&gt;&lt;a href=&quot;#为-ViewGroup-指定-LayoutAnimation&quot; class=&quot;headerlink&quot; title=&quot;为 ViewGroup 指定 LayoutAnimation&quot;&gt;&lt;/a&gt;为 ViewGroup 指定 LayoutAnimation&lt;/h5&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ListView&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;attr&quot;&gt;android:id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;@+id/lv_test&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;attr&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;attr&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &lt;span class=&quot;attr&quot;&gt;android:layoutAnimation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;@anim/anim_layout&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;ListView&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过这几部就指定了 ListView item 的进入动画，最后效果如下所示：&lt;br&gt;&lt;img src=&quot;/2016/08/23/Android-动画分析/view_group.gif&quot; alt=&quot;view_group.gif&quot; title=&quot;&quot;&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
