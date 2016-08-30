@@ -86,18 +86,16 @@
 
 
 
-<meta name="description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
+<meta name="description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="给TextView个别字设置点击事件和颜色">
-<meta property="og:url" content="http://weiqianghu.github.io/2016/05/27/给TextView个别字设置点击事件和颜色/index.html">
+<meta property="og:title" content="Android 性能优化">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/08/30/Android-性能优化/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
-<meta property="og:image" content="http://weiqianghu.github.io/images/TextView.png">
-<meta property="og:updated_time" content="2016-06-02T04:06:54.559Z">
+<meta property="og:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
+<meta property="og:updated_time" content="2016-08-30T09:49:38.862Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="给TextView个别字设置点击事件和颜色">
-<meta name="twitter:description" content="像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？">
-<meta name="twitter:image" content="http://weiqianghu.github.io/images/TextView.png">
+<meta name="twitter:title" content="Android 性能优化">
+<meta name="twitter:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
 
 
 
@@ -115,7 +113,7 @@
   };
 </script>
 
-  <title> 给TextView个别字设置点击事件和颜色 | WEIQIANGHU BLOG </title>
+  <title> Android 性能优化 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +263,7 @@
             
             
               
-                给TextView个别字设置点击事件和颜色
+                Android 性能优化
               
             
           </h1>
@@ -277,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-27T17:03:42+08:00" content="2016-05-27">
-              2016-05-27
+            <time itemprop="dateCreated" datetime="2016-08-30T15:48:46+08:00" content="2016-08-30">
+              2016-08-30
             </time>
           </span>
 
@@ -288,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/27/给TextView个别字设置点击事件和颜色/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/27/给TextView个别字设置点击事件和颜色/" itemprop="commentsCount"></span>
+                <a href="/2016/08/30/Android-性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/Android-性能优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,12 +310,33 @@
       
 
       
-        <p>像下图中的效果在日常开发中还是经常用到的，那么像这种效果要怎么实现呢？<br><img src="/images/TextView.png" alt=""></p>
+        <p>Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bitmap 优化、线程优化等。</p>
 <a id="more"></a>
-<p>今天就简单实现以下如图的效果。具体实现步骤如下代码块：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TextView textView = helper.getView(R.id.tv_question_title); <span class="comment">//这里就是findViewById</span></span><br><span class="line">SpannableString spannableString = <span class="keyword">new</span> SpannableString(item);</span><br><span class="line">spannableString.setSpan(<span class="keyword">new</span> TopicSpanWrapper() &#123;  <span class="comment">//TopicSpanWrapper是ClickableSpan的自定义类，为了取消默认的下划线</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View widget)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, <span class="string">"我被点击了"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;, <span class="number">4</span>, <span class="number">8</span>, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);</span><br><span class="line">spannableString.setSpan(<span class="keyword">new</span> ForegroundColorSpan(Color.parseColor(<span class="string">"#6EA6E0"</span>)), <span class="number">4</span>,<span class="number">8</span>, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);<span class="comment">//设置字体的颜色</span></span><br><span class="line"></span><br><span class="line">textView.setText(spannableString);</span><br><span class="line">textView.setMovementMethod(LinkMovementMethod.getInstance());</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicSpanWrapper</span> <span class="keyword">extends</span> <span class="title">ClickableSpan</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateDrawState</span><span class="params">(TextPaint ds)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.updateDrawState(ds);</span><br><span class="line">        <span class="comment">// 去掉超链接的下划线</span></span><br><span class="line">        ds.setUnderlineText(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过以上步骤就实现了上图所示的效果。</p>
+<h3 id="布局优化"><a href="#布局优化" class="headerlink" title="布局优化"></a>布局优化</h3><p>布局优化的思想就是尽可能提交布局的层级，因为用xml编写的布局文件， Android 会将其解析然后经过测量、布局、绘制出来，减少布局层级可以减少 XML 解析的时间和对 View 的测量、布局、绘制的时间。<br>针对布局优化我们给出一下建议：</p>
+<ol>
+<li>删去无用的控件层级</li>
+<li>在保持布局层级不增加的情况下，尽可能使用 LinearLayout 和 FrameLayout 而不要使用 RelativeLayout。</li>
+<li>使用 <merge> 、 <include> 标签和 ViewStub 进行布局重用和布局优化。</include></merge></li>
+<li>绘制优化，在自定义控件时不要再 onDraw 方法中进行耗时操作，因为 onDraw 方法有可能被频繁调用。包括：新建局部对象、循环操作等。</li>
+</ol>
+<h3 id="内存泄漏优化"><a href="#内存泄漏优化" class="headerlink" title="内存泄漏优化"></a>内存泄漏优化</h3><p>内存泄漏会使得系统不能释放无用的内存，轻则使得程序的内存占用居高不下，造成应用甚至系统的卡顿，重则造成 OOM 。下面就介绍几种常见的内存泄漏问题。</p>
+<ol>
+<li>Activity 中的静态变量持有当前 Activity 的应用，因为静态变量的生命周期和应用生命周期一样长。</li>
+<li>单例模式造成的内存泄漏，单例对象不要持有非静态类的对象，例如 Activity 等，因为单例对象也是静态的，其生命周期和应用生命周期一致。</li>
+<li>属性动画造成的内存泄漏，在 Activity 的 onDestroy 方法中要 cancel 掉属性动画。</li>
+<li>资源未关闭造成的内存泄漏，包括：TypedArray 、 File 、 数据库 、 Bitmap 、 BraodcastReceiver 、 ContentObserver 等。</li>
+<li>避免使用非静态内部类、匿名内部类。</li>
+<li>Handler 造成的内部泄漏，可以将 Handler 定义成静态的，然后通过弱引用引用外部类的对象，并且在 Activity 的 onDestroy 方法中移除消息队列中的消息。</li>
+</ol>
+<h3 id="响应速度优化"><a href="#响应速度优化" class="headerlink" title="响应速度优化"></a>响应速度优化</h3><p>响应速度优化的核心思想是避免在主线程中做耗时操作，对于耗时操作可以将其移动到子线程之中去做，这样可以大大提升应用的响应速度。同时在新建线程时要使用线程池来管理线程，因为线程也是一种稀缺资源，它的创建和销毁都会消耗很多时间资源，通过线程池管理线程可以大大优化线程引起的性能开销。</p>
+<h3 id="ListView-和-Bitmap-优化"><a href="#ListView-和-Bitmap-优化" class="headerlink" title="ListView 和 Bitmap 优化"></a>ListView 和 Bitmap 优化</h3><p>ListView 的优化主要在 Adapter 中，要通过 convertView 、 ViewHolder 复用对象。可以通过使用 RecyclerView 代替 ListView 和 GridView 。<br>Bitmap 的优化主要是在加载图片是对图片进行缩放，减少使用内存，避免 OOM 的发生。</p>
+<h3 id="一些性能优化建议"><a href="#一些性能优化建议" class="headerlink" title="一些性能优化建议"></a>一些性能优化建议</h3><ol>
+<li>避免创建过多的对象，能使用局部变量解决的就不要定义成员变量，避免在循环中创建对象。</li>
+<li>避免使用枚举，枚举比整形的内存占用要大。</li>
+<li>使用 static final 来修饰常量。</li>
+<li>使用 Android 特有的数据结构，包括： SparseArray 、 pair 等。</li>
+<li>使用软引用和弱引用</li>
+</ol>
 
       
     </div>
@@ -348,17 +367,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/" rel="next" title="软键盘弹出时RecyclerView自动滑到底部">
-                <i class="fa fa-chevron-left"></i> 软键盘弹出时RecyclerView自动滑到底部
+              <a href="/2016/08/23/Android-动画分析/" rel="next" title="Android 动画分析">
+                <i class="fa fa-chevron-left"></i> Android 动画分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/31/Android-Studio常用快捷键/" rel="prev" title="Android Studio常用快捷键">
-                Android Studio常用快捷键 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -384,8 +399,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/27/给TextView个别字设置点击事件和颜色/"
-           data-title="给TextView个别字设置点击事件和颜色" data-url="http://weiqianghu.github.io/2016/05/27/给TextView个别字设置点击事件和颜色/">
+      <div class="ds-thread" data-thread-key="2016/08/30/Android-性能优化/"
+           data-title="Android 性能优化" data-url="http://weiqianghu.github.io/2016/08/30/Android-性能优化/">
       </div>
     
   </div>
@@ -476,7 +491,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局优化"><span class="nav-number">1.</span> <span class="nav-text">布局优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄漏优化"><span class="nav-number">2.</span> <span class="nav-text">内存泄漏优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应速度优化"><span class="nav-number">3.</span> <span class="nav-text">响应速度优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-和-Bitmap-优化"><span class="nav-number">4.</span> <span class="nav-text">ListView 和 Bitmap 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些性能优化建议"><span class="nav-number">5.</span> <span class="nav-text">一些性能优化建议</span></a></li></ol></div>
             
           </div>
         </section>
