@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://weiqianghu.github.io/2016/08/30/Android-性能优化/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
 <meta property="og:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
-<meta property="og:updated_time" content="2016-08-30T09:49:38.862Z">
+<meta property="og:updated_time" content="2016-08-30T10:04:13.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 性能优化">
 <meta name="twitter:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
@@ -337,6 +337,7 @@
 <li>使用 Android 特有的数据结构，包括： SparseArray 、 pair 等。</li>
 <li>使用软引用和弱引用</li>
 </ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>通过在日常编码中注意这些问题，可以编写出性能更好体验更优的代码，不积跬步，无以至千里；不积小流，无以成江海，每次的大突破就是由一次次的小进步组成的，加油！！！</p>
 
       
     </div>
@@ -491,7 +492,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局优化"><span class="nav-number">1.</span> <span class="nav-text">布局优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄漏优化"><span class="nav-number">2.</span> <span class="nav-text">内存泄漏优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应速度优化"><span class="nav-number">3.</span> <span class="nav-text">响应速度优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-和-Bitmap-优化"><span class="nav-number">4.</span> <span class="nav-text">ListView 和 Bitmap 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些性能优化建议"><span class="nav-number">5.</span> <span class="nav-text">一些性能优化建议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#布局优化"><span class="nav-number">1.</span> <span class="nav-text">布局优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄漏优化"><span class="nav-number">2.</span> <span class="nav-text">内存泄漏优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应速度优化"><span class="nav-number">3.</span> <span class="nav-text">响应速度优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-和-Bitmap-优化"><span class="nav-number">4.</span> <span class="nav-text">ListView 和 Bitmap 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些性能优化建议"><span class="nav-number">5.</span> <span class="nav-text">一些性能优化建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
           </div>
         </section>
