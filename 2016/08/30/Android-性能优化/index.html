@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://weiqianghu.github.io/2016/08/30/Android-性能优化/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
 <meta property="og:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
-<meta property="og:updated_time" content="2016-08-30T10:04:13.389Z">
+<meta property="og:updated_time" content="2016-08-31T01:11:31.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 性能优化">
 <meta name="twitter:description" content="Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bit">
@@ -312,11 +312,11 @@
       
         <p>Android 作为一种移动设备，内存资源和计算资源都受到限制，如果对内存使用不当，可能出现内存泄漏的问题，过多的使用内存，则有可能出现内存溢出，即OOM问题。而对 CPU 资源的不恰当使用则有可能出现 ANR 问题，针对这些问题，对于 Android 开发人员就提出了更高的挑战。本文将会介绍一下性能优化方案，包括：布局优化、绘制优化、内存泄漏优化、响应速度优化、 ListView 优化、 Bitmap 优化、线程优化等。</p>
 <a id="more"></a>
-<h3 id="布局优化"><a href="#布局优化" class="headerlink" title="布局优化"></a>布局优化</h3><p>布局优化的思想就是尽可能提交布局的层级，因为用xml编写的布局文件， Android 会将其解析然后经过测量、布局、绘制出来，减少布局层级可以减少 XML 解析的时间和对 View 的测量、布局、绘制的时间。<br>针对布局优化我们给出一下建议：</p>
+<h3 id="布局优化"><a href="#布局优化" class="headerlink" title="布局优化"></a>布局优化</h3><p>布局优化的思想就是尽可能提交布局的层级，因为用xml编写的布局文件， Android 会将其解析然后经过测量、布局、绘制出来，减少布局层级可以减少 XML 解析的时间和对 View 的测量、布局、绘制的时间。<br>针对布局优化我们给出以下建议：</p>
 <ol>
 <li>删去无用的控件层级</li>
 <li>在保持布局层级不增加的情况下，尽可能使用 LinearLayout 和 FrameLayout 而不要使用 RelativeLayout。</li>
-<li>使用 <merge> 、 <include> 标签和 ViewStub 进行布局重用和布局优化。</include></merge></li>
+<li>使用 merge、 include 标签和 ViewStub 进行布局重用和布局优化。</li>
 <li>绘制优化，在自定义控件时不要再 onDraw 方法中进行耗时操作，因为 onDraw 方法有可能被频繁调用。包括：新建局部对象、循环操作等。</li>
 </ol>
 <h3 id="内存泄漏优化"><a href="#内存泄漏优化" class="headerlink" title="内存泄漏优化"></a>内存泄漏优化</h3><p>内存泄漏会使得系统不能释放无用的内存，轻则使得程序的内存占用居高不下，造成应用甚至系统的卡顿，重则造成 OOM 。下面就介绍几种常见的内存泄漏问题。</p>
