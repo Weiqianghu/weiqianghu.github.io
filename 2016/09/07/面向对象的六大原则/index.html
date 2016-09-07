@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android Gradle," />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -86,18 +86,16 @@
 
 
 
-<meta name="description" content="项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。">
+<meta name="description" content="面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="提高Gradle构建速度">
-<meta property="og:url" content="http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/index.html">
+<meta property="og:title" content="面向对象的六大原则">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/09/07/面向对象的六大原则/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。">
-<meta property="og:image" content="http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/as_gradle_offline.png">
-<meta property="og:updated_time" content="2016-06-08T09:19:48.491Z">
+<meta property="og:description" content="面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。">
+<meta property="og:updated_time" content="2016-09-07T12:15:07.426Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="提高Gradle构建速度">
-<meta name="twitter:description" content="项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。">
-<meta name="twitter:image" content="http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/as_gradle_offline.png">
+<meta name="twitter:title" content="面向对象的六大原则">
+<meta name="twitter:description" content="面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。">
 
 
 
@@ -115,7 +113,7 @@
   };
 </script>
 
-  <title> 提高Gradle构建速度 | WEIQIANGHU BLOG </title>
+  <title> 面向对象的六大原则 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +263,7 @@
             
             
               
-                提高Gradle构建速度
+                面向对象的六大原则
               
             
           </h1>
@@ -277,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-08T16:47:51+08:00" content="2016-06-08">
-              2016-06-08
+            <time itemprop="dateCreated" datetime="2016-09-07T14:12:05+08:00" content="2016-09-07">
+              2016-09-07
             </time>
           </span>
 
@@ -288,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/08/提高Gradle构建速度/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/08/提高Gradle构建速度/" itemprop="commentsCount"></span>
+                <a href="/2016/09/07/面向对象的六大原则/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/面向对象的六大原则/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,14 +310,18 @@
       
 
       
-        <p>项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。</p>
-<a id="more"></a>
-<h2 id="在下面的目录下面创建gradle-properties文件："><a href="#在下面的目录下面创建gradle-properties文件：" class="headerlink" title="在下面的目录下面创建gradle.properties文件："></a>在下面的目录下面创建gradle.properties文件：</h2><pre><code>/home/&lt;username&gt;/.gradle/ (Linux)
-/Users/&lt;username&gt;/.gradle/ (Mac)
-C:\Users\&lt;username&gt;\.gradle (Windows)
-</code></pre><p>在gradle.properties文件中加入下面内容<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#开启守护进程</span><br><span class="line">org.gradle.daemon=true</span><br><span class="line"></span><br><span class="line"># Specifies the JVM arguments used for the daemon process.</span><br><span class="line"># The setting is particularly useful for tweaking memory settings.</span><br><span class="line"># Default value: -Xmx10248m -XX:MaxPermSize=256m</span><br><span class="line">org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8</span><br><span class="line"></span><br><span class="line">#开启并行编译</span><br><span class="line">org.gradle.parallel=true</span><br><span class="line"></span><br><span class="line"># Enables new incubating mode that makes Gradle selective when configuring projects. </span><br><span class="line"># Only relevant projects are configured which results in faster builds for large multi-projects.</span><br><span class="line"># http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand</span><br><span class="line">org.gradle.configureondemand=true</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置Android-Studio"><a href="#配置Android-Studio" class="headerlink" title="配置Android Studio"></a>配置Android Studio</h2><p>如下图<br><img src="/2016/06/08/提高Gradle构建速度/as_gradle_offline.png" alt="as_gradle_offline.png" title=""></p>
-<p>通过以上两个步骤可以显著提高Gradle的build速度</p>
+        <p>面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。<br><a id="more"></a></p>
+<h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><p>单一职责理解起来比较简单，即每个类、每个方法只做一件事，使得每个类每个方法尽量的简单，使得功能相关的方法在同一个类中，功能相关的类在同一个包中，这样做的好处是显而易见的，代码高内聚可复用性高等。然而单一职责原则操作起来却不那么容易，因为单一职责的划分界限一般情况下都不清晰，这个具体的界限需要我们自己去把握。</p>
+<h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><p>开闭原则的定义是：软件中的对象应该对扩展开发对修改关闭。当软件需求变化时，应该尽量少的去修改源码，而尽可能的去进行扩展以应对需求的变化，要做到这一点。我们应该在开发之初就应该考虑到程序的扩展性，只要开发时就考虑到扩展性，自然就不怕需求的多变了。</p>
+<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><p>里氏替换原则的定义是：所有引用基类的地方必须能透明的使用其子类对象。通俗点说就是任何父类可以出现的地方都可以用子类替换，且不会有任何不良影响。要理解这个原则就要求我们理解继承和多态的概念，且能区分抽象类和接口的区别。</p>
+<h3 id="依赖倒置呀原则"><a href="#依赖倒置呀原则" class="headerlink" title="依赖倒置呀原则"></a>依赖倒置呀原则</h3><p>依赖倒置原则是指：高层次的模块不应该依赖于低层次的模块。即：</p>
+<ol>
+<li>高层次的模块不依赖于低层次模块，二者都应该依赖于抽象</li>
+<li>抽象不应该依赖细节，细节应该依赖抽象<br>听起来还是有点抽象，简单点说就是面向接口编程，例如在 java 中我们有这种写法： List<string> list = new ArrayList&lt;&gt;();这就是面向接口编程的一种体现。</string></li>
+</ol>
+<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>接口隔离原则的定义是：客户端不需要依赖它不需要的接口，通俗点说就是我们在设计接口是应该遵循一个接口中只定义确实需要在同一个接口中的方法。其实这也是单一职责原则的体现，即：一个接口不要包含无关的行为。在 java 中有很多接口隔离原则的体现，例如 Cloneable 接口甚至都没有方法，因为我们只需要用 Cloneable 接口来区分是否可以 clone 而已，并不需要其他的行为。</p>
+<h3 id="迪米特原则"><a href="#迪米特原则" class="headerlink" title="迪米特原则"></a>迪米特原则</h3><p>迪米特原则的定义是：一个对象应该对其他对象具有最少的了解，通俗点说就是应该尽量降低类之间的耦合。</p>
+<p>其实我的理解是，虽然有这么多原则但总结起来其实就是六个字：高内聚，低耦合。在平时开发中我们应该尽量设计出高内聚、低耦合、可扩展的程序。</p>
 
       
     </div>
@@ -341,7 +343,7 @@ C:\Users\&lt;username&gt;\.gradle (Windows)
       
         <div class="post-tags">
           
-            <a href="/tags/Android-Gradle/" rel="tag">#Android Gradle</a>
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
           
         </div>
       
@@ -350,17 +352,13 @@ C:\Users\&lt;username&gt;\.gradle (Windows)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/02/Android中的消息传递机制，Handler、looper、MessageQueue、Message源码探析/" rel="next" title="Android中的消息传递机制，Handler、looper、MessageQueue、Message源码探析">
-                <i class="fa fa-chevron-left"></i> Android中的消息传递机制，Handler、looper、MessageQueue、Message源码探析
+              <a href="/2016/08/30/Android-性能优化/" rel="next" title="Android 性能优化">
+                <i class="fa fa-chevron-left"></i> Android 性能优化
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/15/Java中的I-O/" rel="prev" title="Java中的I/O">
-                Java中的I/O <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -386,8 +384,8 @@ C:\Users\&lt;username&gt;\.gradle (Windows)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/08/提高Gradle构建速度/"
-           data-title="提高Gradle构建速度" data-url="http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/">
+      <div class="ds-thread" data-thread-key="2016/09/07/面向对象的六大原则/"
+           data-title="面向对象的六大原则" data-url="http://weiqianghu.github.io/2016/09/07/面向对象的六大原则/">
       </div>
     
   </div>
@@ -478,7 +476,7 @@ C:\Users\&lt;username&gt;\.gradle (Windows)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在下面的目录下面创建gradle-properties文件："><span class="nav-number">1.</span> <span class="nav-text">在下面的目录下面创建gradle.properties文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Android-Studio"><span class="nav-number">2.</span> <span class="nav-text">配置Android Studio</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一职责原则"><span class="nav-number">1.</span> <span class="nav-text">单一职责原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开闭原则"><span class="nav-number">2.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏替换原则"><span class="nav-number">3.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖倒置呀原则"><span class="nav-number">4.</span> <span class="nav-text">依赖倒置呀原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">5.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迪米特原则"><span class="nav-number">6.</span> <span class="nav-text">迪米特原则</span></a></li></ol></div>
             
           </div>
         </section>

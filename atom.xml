@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-08-31T01:11:31.329Z</updated>
+  <updated>2016-09-07T12:15:07.426Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面向对象的六大原则</title>
+    <link href="http://weiqianghu.github.io/2016/09/07/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99/"/>
+    <id>http://weiqianghu.github.io/2016/09/07/面向对象的六大原则/</id>
+    <published>2016-09-07T06:12:05.000Z</published>
+    <updated>2016-09-07T12:15:07.426Z</updated>
+    
+    <content type="html">&lt;p&gt;面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;单一职责原则&quot;&gt;&lt;a href=&quot;#单一职责原则&quot; class=&quot;headerlink&quot; title=&quot;单一职责原则&quot;&gt;&lt;/a&gt;单一职责原则&lt;/h3&gt;&lt;p&gt;单一职责理解起来比较简单，即每个类、每个方法只做一件事，使得每个类每个方法尽量的简单，使得功能相关的方法在同一个类中，功能相关的类在同一个包中，这样做的好处是显而易见的，代码高内聚可复用性高等。然而单一职责原则操作起来却不那么容易，因为单一职责的划分界限一般情况下都不清晰，这个具体的界限需要我们自己去把握。&lt;/p&gt;
+&lt;h3 id=&quot;开闭原则&quot;&gt;&lt;a href=&quot;#开闭原则&quot; class=&quot;headerlink&quot; title=&quot;开闭原则&quot;&gt;&lt;/a&gt;开闭原则&lt;/h3&gt;&lt;p&gt;开闭原则的定义是：软件中的对象应该对扩展开发对修改关闭。当软件需求变化时，应该尽量少的去修改源码，而尽可能的去进行扩展以应对需求的变化，要做到这一点。我们应该在开发之初就应该考虑到程序的扩展性，只要开发时就考虑到扩展性，自然就不怕需求的多变了。&lt;/p&gt;
+&lt;h3 id=&quot;里氏替换原则&quot;&gt;&lt;a href=&quot;#里氏替换原则&quot; class=&quot;headerlink&quot; title=&quot;里氏替换原则&quot;&gt;&lt;/a&gt;里氏替换原则&lt;/h3&gt;&lt;p&gt;里氏替换原则的定义是：所有引用基类的地方必须能透明的使用其子类对象。通俗点说就是任何父类可以出现的地方都可以用子类替换，且不会有任何不良影响。要理解这个原则就要求我们理解继承和多态的概念，且能区分抽象类和接口的区别。&lt;/p&gt;
+&lt;h3 id=&quot;依赖倒置呀原则&quot;&gt;&lt;a href=&quot;#依赖倒置呀原则&quot; class=&quot;headerlink&quot; title=&quot;依赖倒置呀原则&quot;&gt;&lt;/a&gt;依赖倒置呀原则&lt;/h3&gt;&lt;p&gt;依赖倒置原则是指：高层次的模块不应该依赖于低层次的模块。即：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;高层次的模块不依赖于低层次模块，二者都应该依赖于抽象&lt;/li&gt;
+&lt;li&gt;抽象不应该依赖细节，细节应该依赖抽象&lt;br&gt;听起来还是有点抽象，简单点说就是面向接口编程，例如在 java 中我们有这种写法： List&lt;string&gt; list = new ArrayList&amp;lt;&amp;gt;();这就是面向接口编程的一种体现。&lt;/string&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;接口隔离原则&quot;&gt;&lt;a href=&quot;#接口隔离原则&quot; class=&quot;headerlink&quot; title=&quot;接口隔离原则&quot;&gt;&lt;/a&gt;接口隔离原则&lt;/h3&gt;&lt;p&gt;接口隔离原则的定义是：客户端不需要依赖它不需要的接口，通俗点说就是我们在设计接口是应该遵循一个接口中只定义确实需要在同一个接口中的方法。其实这也是单一职责原则的体现，即：一个接口不要包含无关的行为。在 java 中有很多接口隔离原则的体现，例如 Cloneable 接口甚至都没有方法，因为我们只需要用 Cloneable 接口来区分是否可以 clone 而已，并不需要其他的行为。&lt;/p&gt;
+&lt;h3 id=&quot;迪米特原则&quot;&gt;&lt;a href=&quot;#迪米特原则&quot; class=&quot;headerlink&quot; title=&quot;迪米特原则&quot;&gt;&lt;/a&gt;迪米特原则&lt;/h3&gt;&lt;p&gt;迪米特原则的定义是：一个对象应该对其他对象具有最少的了解，通俗点说就是应该尽量降低类之间的耦合。&lt;/p&gt;
+&lt;p&gt;其实我的理解是，虽然有这么多原则但总结起来其实就是六个字：高内聚，低耦合。在平时开发中我们应该尽量设计出高内聚、低耦合、可扩展的程序。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;面向对象思想是软件工程史上的一个里程碑式的编程思想，然而面向对象编程思想的应用却不是很简单，如果不能正确理解面向对象编程思想，却使用面向对象编程语言编程那将是一场灾难，为了避免写出烂代码，我们必须学习设计模式，而面向对象的六大原则将指导我们编写出可读性高、扩展性好的面向对象代码，这篇文章将介绍面向对象的六大原则。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://weiqianghu.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 性能优化</title>
