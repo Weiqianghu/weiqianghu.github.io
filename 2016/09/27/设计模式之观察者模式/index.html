@@ -1,0 +1,624 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WEIQIANGHU BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="毫不夸张的说，观察者模式是最常用的设计模式之一了，通过使用观察者模式可以极大的解耦。 Android 四大组件之一的 BroadcastReceiver 就是一个耦合性非常低的观察者模式，最近大热的 RxJava 也是观察者模式的具体应用，所以我们学好观察者模式是非常有必要的，这篇博客将简要介绍观察者模式的概念、使用场景、优缺点，最后还会介绍 Android 源码中对于观察者模式的应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之观察者模式">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/09/27/设计模式之观察者模式/index.html">
+<meta property="og:site_name" content="WEIQIANGHU BLOG">
+<meta property="og:description" content="毫不夸张的说，观察者模式是最常用的设计模式之一了，通过使用观察者模式可以极大的解耦。 Android 四大组件之一的 BroadcastReceiver 就是一个耦合性非常低的观察者模式，最近大热的 RxJava 也是观察者模式的具体应用，所以我们学好观察者模式是非常有必要的，这篇博客将简要介绍观察者模式的概念、使用场景、优缺点，最后还会介绍 Android 源码中对于观察者模式的应用。">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/09/27/设计模式之观察者模式/observer_uml.png">
+<meta property="og:updated_time" content="2016-09-27T07:59:58.851Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之观察者模式">
+<meta name="twitter:description" content="毫不夸张的说，观察者模式是最常用的设计模式之一了，通过使用观察者模式可以极大的解耦。 Android 四大组件之一的 BroadcastReceiver 就是一个耦合性非常低的观察者模式，最近大热的 RxJava 也是观察者模式的具体应用，所以我们学好观察者模式是非常有必要的，这篇博客将简要介绍观察者模式的概念、使用场景、优缺点，最后还会介绍 Android 源码中对于观察者模式的应用。">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/09/27/设计模式之观察者模式/observer_uml.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 设计模式之观察者模式 | WEIQIANGHU BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WEIQIANGHU BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                设计模式之观察者模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T13:57:12+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/设计模式之观察者模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/设计模式之观察者模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>毫不夸张的说，观察者模式是最常用的设计模式之一了，通过使用观察者模式可以极大的解耦。 Android 四大组件之一的 BroadcastReceiver 就是一个耦合性非常低的观察者模式，最近大热的 RxJava 也是观察者模式的具体应用，所以我们学好观察者模式是非常有必要的，这篇博客将简要介绍观察者模式的概念、使用场景、优缺点，最后还会介绍 Android 源码中对于观察者模式的应用。<br><img src="/2016/09/27/设计模式之观察者模式/observer_uml.png" alt="observer_uml.png" title=""><br><a id="more"></a></p>
+<h3 id="观察者模式的定义"><a href="#观察者模式的定义" class="headerlink" title="观察者模式的定义"></a>观察者模式的定义</h3><p> 观察者模式定义了一种一对多的依赖关系，让多个观察者(Observer)同时监听一个被观察者(Observable,有时候也叫做 Subject)，这个被观察者在状态变化时会通知所有订阅的观察者，使得观察者能够更新自己。可以看到 Android 中的 BroadcastReceiver 就是一个观察者模式。</p>
+<h3 id="观察者模式的-UML"><a href="#观察者模式的-UML" class="headerlink" title="观察者模式的 UML"></a>观察者模式的 UML</h3><p>从上面的 UML 图可以看到，观察者模式涉及到了四个角色，分别是：<br>Subject 或 Observable ：抽象主题角色把所有对观察者对象的引用保存在一个聚集（比如ArrayList对象）里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象，抽象主题角色又叫做抽象被观察者(Observable)角色。<br>ConcreteSubject 或 ConcreteObservable ： 将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。 具体主题角色又叫做具体被观察者 ( Concrete Observable ) 角色。<br>Observer ： 为所有的具体观察者定义一个接口，在得到主题的通知时更新自己，这个接口叫做更新接口。<br>ConcreteObserver ： 存储与主题的状态自恰的状态。具体观察者角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态 像协调。如果需要，具体观察者角色可以保持一个指向具体主题对象的引用。</p>
+<p>下面是观察者模式的一个简单实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 更新接口</span><br><span class="line">     * <span class="doctag">@param</span> state    更新的状态</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String state)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 用来保存注册的观察者对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">private</span>    List&lt;Observer&gt; list = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 注册观察者对象</span><br><span class="line">     * <span class="doctag">@param</span> observer    观察者对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        list.add(observer);</span><br><span class="line">        System.out.println(<span class="string">"Attached an observer"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 删除观察者对象</span><br><span class="line">     * <span class="doctag">@param</span> observer    观察者对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">(Observer observer)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        list.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 通知所有注册的观察者对象</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nodifyObservers</span><span class="params">(String newState)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(Observer observer : list)&#123;</span><br><span class="line">            observer.update(newState);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteObserver</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">//观察者的状态</span></span><br><span class="line">    <span class="keyword">private</span> String observerState;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String state)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         * 更新观察者的状态，使其与目标的状态保持一致</span><br><span class="line">         */</span></span><br><span class="line">        observerState = state;</span><br><span class="line">        System.out.println(<span class="string">"状态为："</span>+observerState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String state;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(String newState)</span></span>&#123;</span><br><span class="line">        state = newState;</span><br><span class="line">        System.out.println(<span class="string">"主题状态为："</span> + state);</span><br><span class="line">        <span class="comment">//状态发生改变，通知各个观察者</span></span><br><span class="line">        <span class="keyword">this</span>.nodifyObservers(state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建主题对象</span></span><br><span class="line">        ConcreteSubject subject = <span class="keyword">new</span> ConcreteSubject();</span><br><span class="line">        <span class="comment">//创建观察者对象</span></span><br><span class="line">        Observer observer = <span class="keyword">new</span> ConcreteObserver();</span><br><span class="line">        <span class="comment">//将观察者对象登记到主题对象上</span></span><br><span class="line">        subject.attach(observer);</span><br><span class="line">        <span class="comment">//改变主题对象的状态</span></span><br><span class="line">        subject.change(<span class="string">"new state"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>观察者模式如此重要以至于 JDK 已经为我们内置了 Observable 和 Observer，下面是 Observable 和 Observer 的源码也很简单，基本上和我们自己实现的没有什么不同。 以后我们如果需要使用观察者模式就可以相应的实现 Observer 继承 Observable 就可以了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable observable, Object data)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Observer&gt; observers = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"observer == null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!observers.contains(observer))</span><br><span class="line">                observers.add(observer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        changed = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> observers.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer observer)</span> </span>&#123;</span><br><span class="line">        observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        observers.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> changed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        notifyObservers(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">        Observer[] arrays = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hasChanged()) &#123;</span><br><span class="line">                clearChanged();</span><br><span class="line">                size = observers.size();</span><br><span class="line">                arrays = <span class="keyword">new</span> Observer[size];</span><br><span class="line">                observers.toArray(arrays);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (arrays != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Observer observer : arrays) &#123;</span><br><span class="line">                observer.update(<span class="keyword">this</span>, data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        changed = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Android-源码中的观察者模式"><a href="#Android-源码中的观察者模式" class="headerlink" title="Android 源码中的观察者模式"></a>Android 源码中的观察者模式</h3><p>Android 源码中对于观察者模式的典型应用必属 ListView 了。我们在使用 ListView 时一般都会继承 BaseAdapter 实现自己的 Adapter ，然后将 Adapter 设置给 ListView ，在 数据更新时会调用 Adapter 的 notifyDataSetChanged 方法进行界面更新，首先我们看一下 BaseAdapter 的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseAdapter</span> <span class="keyword">implements</span> <span class="title">ListAdapter</span>, <span class="title">SpinnerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DataSetObservable mDataSetObservable = <span class="keyword">new</span> DataSetObservable();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasStableIds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerDataSetObserver</span><span class="params">(DataSetObserver observer)</span> </span>&#123;</span><br><span class="line">        mDataSetObservable.registerObserver(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregisterDataSetObserver</span><span class="params">(DataSetObserver observer)</span> </span>&#123;</span><br><span class="line">        mDataSetObservable.unregisterObserver(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyDataSetChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mDataSetObservable.notifyChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyDataSetInvalidated</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mDataSetObservable.notifyInvalidated();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">areAllItemsEnabled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getDropDownView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getView(position, convertView, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemViewType</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getViewTypeCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getCount() == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>我们继承 BaseAdapter 时覆写的一些方法都可以看到，但是这次我们的重点是 notifyDataSetChanged 方法， notifyDataSetChanged 方法又调用了 DataSetObservable 的 notifyChanged 方法。从这些类的命名上我们能够明显看出观察者模式的痕迹。 很明显 DataSetObservable 就是一个具体的 Observable 实现。下面我们再看看 DataSetObservable 的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSetObservable</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">DataSetObserver</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(mObservers) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = mObservers.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                mObservers.get(i).onChanged();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyInvalidated</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (mObservers) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = mObservers.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                mObservers.get(i).onInvalidated();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> ArrayList&lt;T&gt; mObservers = <span class="keyword">new</span> ArrayList&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(T observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The observer is null."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span>(mObservers) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mObservers.contains(observer)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Observer "</span> + observer + <span class="string">" is already registered."</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            mObservers.add(observer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregisterObserver</span><span class="params">(T observer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The observer is null."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span>(mObservers) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = mObservers.indexOf(observer);</span><br><span class="line">            <span class="keyword">if</span> (index == -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Observer "</span> + observer + <span class="string">" was not registered."</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            mObservers.remove(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unregisterAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(mObservers) &#123;</span><br><span class="line">            mObservers.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>从以上代码我们应该能明显的看出这是一个典型的 Observable 实现。 DataSetObservable 的 notifyChanged 进一步调用了 DataSetObserver 的 onChanged 方法。看到这里我们应该明白了 DataSetObserver 便是 Observer 的具体实现。 DataSetObserver 订阅 DataSetObservable ，在 DataSetObservable 的状态改变时会去通知 DataSetObserver 。 可以看到这确实是一个典型的 观察者模式。现在我们要问的是 DataSetObserver 是什么时候订阅 DataSetObservable的，下面我们看一下 ListView 的 setAdapter 方法源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdapter</span><span class="params">(ListAdapter adapter)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (mAdapter != <span class="keyword">null</span> &amp;&amp; mDataSetObserver != <span class="keyword">null</span>) &#123;</span><br><span class="line">         mAdapter.unregisterDataSetObserver(mDataSetObserver);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     resetList();</span><br><span class="line">     mRecycler.clear();</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (mHeaderViewInfos.size() &gt; <span class="number">0</span>|| mFooterViewInfos.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">         mAdapter = <span class="keyword">new</span> HeaderViewListAdapter(mHeaderViewInfos, mFooterViewInfos, adapter);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         mAdapter = adapter;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     mOldSelectedPosition = INVALID_POSITION;</span><br><span class="line">     mOldSelectedRowId = INVALID_ROW_ID;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// AbsListView#setAdapter will update choice mode states.</span></span><br><span class="line">     <span class="keyword">super</span>.setAdapter(adapter);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (mAdapter != <span class="keyword">null</span>) &#123;</span><br><span class="line">         mAreAllItemsSelectable = mAdapter.areAllItemsEnabled();</span><br><span class="line">         mOldItemCount = mItemCount;</span><br><span class="line">         mItemCount = mAdapter.getCount();</span><br><span class="line">         checkFocus();</span><br><span class="line"></span><br><span class="line">         <span class="comment">//重点 重点 重点</span></span><br><span class="line">         mDataSetObserver = <span class="keyword">new</span> AdapterDataSetObserver();</span><br><span class="line">         mAdapter.registerDataSetObserver(mDataSetObserver);</span><br><span class="line"></span><br><span class="line">         mRecycler.setViewTypeCount(mAdapter.getViewTypeCount());</span><br><span class="line"></span><br><span class="line">         <span class="keyword">int</span> position;</span><br><span class="line">         <span class="keyword">if</span> (mStackFromBottom) &#123;</span><br><span class="line">             position = lookForSelectablePosition(mItemCount - <span class="number">1</span>, <span class="keyword">false</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             position = lookForSelectablePosition(<span class="number">0</span>, <span class="keyword">true</span>);</span><br><span class="line">         &#125;</span><br><span class="line">         setSelectedPositionInt(position);</span><br><span class="line">         setNextSelectedPositionInt(position);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (mItemCount == <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">// Nothing selected</span></span><br><span class="line">             checkSelectionChanged();</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         mAreAllItemsSelectable = <span class="keyword">true</span>;</span><br><span class="line">         checkFocus();</span><br><span class="line">         <span class="comment">// Nothing selected</span></span><br><span class="line">         checkSelectionChanged();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     requestLayout();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>从上面的代码我们可以看到，在 setAdapter 时会 new AdapterDataSetObserver ，然后会调用 Adapter 的 registerDataSetObserver 方法，我们要注意的是 setAdapter 方法的参数是 ListAdapter ，而 BaseAdapter 实现了 ListAdapter 接口。又其中 AdapterDataSetObserver 最终继承了 DataSetObserver 。因此 registerDataSetObserver 的最终实现是 BaseAdapter ，在上面我们已经看到在 BaseAdapter 的 registerDataSetObserver 方法中又调用了 DataSetObservable 的 registerObserver 方法，也就是说 DataSetObserver 是在 setAdapter 时订阅了 DataSetObservable 的。<br>下面我们再看看 AdapterDataSetObserver 的源码， AdapterDataSetObserver 是 ListView 的父类 AbsListView 的内部类， AbsListView.AdapterDataSetObserver 又继承了 AdapterView<listadapter>.AdapterDataSetObserver ，其中 AdapterView 是 AbsListView 的父类，因此我们直接看 AdapterView<listadapter>.AdapterDataSetObserver 的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdapterDataSetObserver</span> <span class="keyword">extends</span> <span class="title">DataSetObserver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Parcelable mInstanceState = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mDataChanged = <span class="keyword">true</span>;</span><br><span class="line">        mOldItemCount = mItemCount;</span><br><span class="line">        mItemCount = getAdapter().getCount();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Detect the case where a cursor that was previously invalidated has</span></span><br><span class="line">        <span class="comment">// been repopulated with new data.</span></span><br><span class="line">        <span class="keyword">if</span> (AdapterView.<span class="keyword">this</span>.getAdapter().hasStableIds() &amp;&amp; mInstanceState != <span class="keyword">null</span></span><br><span class="line">                &amp;&amp; mOldItemCount == <span class="number">0</span> &amp;&amp; mItemCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            AdapterView.<span class="keyword">this</span>.onRestoreInstanceState(mInstanceState);</span><br><span class="line">            mInstanceState = <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            rememberSyncState();</span><br><span class="line">        &#125;</span><br><span class="line">        checkFocus();</span><br><span class="line">        requestLayout();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onInvalidated</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mDataChanged = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (AdapterView.<span class="keyword">this</span>.getAdapter().hasStableIds()) &#123;</span><br><span class="line">            <span class="comment">// Remember the current state for the case where our hosting activity is being</span></span><br><span class="line">            <span class="comment">// stopped and later restarted</span></span><br><span class="line">            mInstanceState = AdapterView.<span class="keyword">this</span>.onSaveInstanceState();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Data is invalid so we should reset our state</span></span><br><span class="line">        mOldItemCount = mItemCount;</span><br><span class="line">        mItemCount = <span class="number">0</span>;</span><br><span class="line">        mSelectedPosition = INVALID_POSITION;</span><br><span class="line">        mSelectedRowId = INVALID_ROW_ID;</span><br><span class="line">        mNextSelectedPosition = INVALID_POSITION;</span><br><span class="line">        mNextSelectedRowId = INVALID_ROW_ID;</span><br><span class="line">        mNeedSync = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        checkFocus();</span><br><span class="line">        requestLayout();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clearSavedState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mInstanceState = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>我们看到在 AdapterView<listadapter>.AdapterDataSetObserver 的 onChanged 方法中调用了 requestLayout() 方法进行重新布局，到这里我们就明白了 ListView 更新的整个过程。 在 ListView 调用 setAdapter 时，会调用 BaseAdapter 的 registerDataSetObserver 方法，BaseAdapter 进一步调用了 DataSetObservable 的 registerObserver 方法，被注册的就是 AdapterView<listadapter>.AdapterDataSetObserver 的实例，这便是 Observer 订阅 Observable 的过程。在数据集发生变化时我们调用 Adapter 的 notifyDataSetChanged 方法， notifyDataSetChanged 会进一步调用 DataSetObservable 的 notifyChanged 方法通知所有的 Observer ，而 Observer 的最终实现者是 AdapterView<listadapter>.AdapterDataSetObserver ，在 AdapterDataSetObserver 调用了 requestLayout 方法进行重新布局，更新界面。</listadapter></listadapter></listadapter></listadapter></listadapter></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>观察者模式的主要作用就是对象的解耦，将具体的观察者和被观察者隔离，它们只依赖 Observable 和 Observer 抽象。 Android 源码中的 ListView 就是应用了 观察者模式。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/26/设计模式之命令模式/" rel="next" title="设计模式之命令模式">
+                <i class="fa fa-chevron-left"></i> 设计模式之命令模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/27/设计模式之观察者模式/"
+           data-title="设计模式之观察者模式" data-url="http://weiqianghu.github.io/2016/09/27/设计模式之观察者模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
+               alt="Weiqianghu" />
+          <p class="site-author-name" itemprop="name">Weiqianghu</p>
+          <p class="site-description motion-element" itemprop="description">珍惜现在拥有的，因为它随时都可能失去</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式的定义"><span class="nav-number">1.</span> <span class="nav-text">观察者模式的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式的-UML"><span class="nav-number">2.</span> <span class="nav-text">观察者模式的 UML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-源码中的观察者模式"><span class="nav-number">3.</span> <span class="nav-text">Android 源码中的观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weiqianghu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"weiqianghu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
