@@ -1,0 +1,626 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WEIQIANGHU BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="可以说代理模式是 23 种设计模式中最重要的设计模式之一了，代理模式也是非常常用的一种设计模式了，有句很有名的话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。在 Android 开发中我们都会使用到图片加载框架，图片加载框架也是层出不穷，比较有名的有： UniversalImageLoader 、 Picasso 、 Glide 、 Fresco 等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之代理模式">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/10/09/设计模式之代理模式/index.html">
+<meta property="og:site_name" content="WEIQIANGHU BLOG">
+<meta property="og:description" content="可以说代理模式是 23 种设计模式中最重要的设计模式之一了，代理模式也是非常常用的一种设计模式了，有句很有名的话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。在 Android 开发中我们都会使用到图片加载框架，图片加载框架也是层出不穷，比较有名的有： UniversalImageLoader 、 Picasso 、 Glide 、 Fresco 等">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/09/设计模式之代理模式/proxy_uml.jpg">
+<meta property="og:updated_time" content="2016-10-09T06:56:42.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之代理模式">
+<meta name="twitter:description" content="可以说代理模式是 23 种设计模式中最重要的设计模式之一了，代理模式也是非常常用的一种设计模式了，有句很有名的话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。在 Android 开发中我们都会使用到图片加载框架，图片加载框架也是层出不穷，比较有名的有： UniversalImageLoader 、 Picasso 、 Glide 、 Fresco 等">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/10/09/设计模式之代理模式/proxy_uml.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 设计模式之代理模式 | WEIQIANGHU BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WEIQIANGHU BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                设计模式之代理模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-09T09:56:16+08:00" content="2016-10-09">
+              2016-10-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/09/设计模式之代理模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/设计模式之代理模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>可以说代理模式是 23 种设计模式中最重要的设计模式之一了，代理模式也是非常常用的一种设计模式了，有句很有名的话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。在 Android 开发中我们都会使用到图片加载框架，图片加载框架也是层出不穷，比较有名的有： UniversalImageLoader 、 Picasso 、 Glide 、 Fresco 等。这么多图片加载框架，我们到底应该用那个呢，这不是我们要讨论的问题。现在假设我们选择了 UniversalImageLoader 作为我们的图片加载库，但是过了一段时间我们发现 UniversalImageLoader 不能满足我们的需求，我们需要切换为 Glide 了，如果我们之前所有用到图片加载的地方都是直接调用 UniversalImageLoader 的 API 的，那么可想而知，这个切换图片加载库的工作量是非常大的，这里就是我们代理模式的用武之地了，我们可以在图片加载库可我们的业务逻辑代码层之间封装一层，也就是所谓的代理层，如果有了代理层，我们再切换图片加载库就只需要修改代理层的代码，这个工作量就会小很多。可以看到代理模式使得客户端和被代理对象之间耦合性降低，程序的扩展性更强了。<br><a id="more"></a></p>
+<h3 id="代理模式的定义和使用场景"><a href="#代理模式的定义和使用场景" class="headerlink" title="代理模式的定义和使用场景"></a>代理模式的定义和使用场景</h3><p>为其他对象提供一种代理以控制对这个对象的访问。<br>当不能或不想直接访问某个对象，或访问某个对象存在困难时可以通过一个代理对象来间接访问，为了保证客户端使用的透明性，委托对象和代理对象要实现相同的接口。</p>
+<h3 id="代理模式-UML-和示例代码"><a href="#代理模式-UML-和示例代码" class="headerlink" title="代理模式 UML 和示例代码"></a>代理模式 UML 和示例代码</h3><img src="/2016/10/09/设计模式之代理模式/proxy_uml.jpg" alt="proxy_uml.jpg" title="">
+<p>下面是代理模式的通用模板代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RealSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">Request</span><span class="params">()</span>  </span><br><span class="line">    </span>&#123;  </span><br><span class="line">        <span class="comment">//业务方法具体实现代码  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">extends</span> <span class="title">Subject</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> RealSubject realSubject = <span class="keyword">new</span> RealSubject(); <span class="comment">//维持一个对真实主题对象的引用</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PreRequest</span><span class="params">()</span> </span><br><span class="line">    </span>&#123;</span><br><span class="line">        …...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Request</span><span class="params">()</span> </span><br><span class="line">    </span>&#123;</span><br><span class="line">        PreRequest();</span><br><span class="line">        realSubject.Request(); <span class="comment">//调用真实主题对象的方法</span></span><br><span class="line">         PostRequest();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PostRequest</span><span class="params">()</span> </span><br><span class="line">    </span>&#123;</span><br><span class="line">        ……</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="静态代理和动态代理"><a href="#静态代理和动态代理" class="headerlink" title="静态代理和动态代理"></a>静态代理和动态代理</h3><h4 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h4><p>代理模式的定义和模板代码在上面已经介绍过了，这个小节介绍的是静态代理和动态代理。静态代理就是由程序员编写代理类的源码，再编译代理类，也就是说在程序运行前代理类的字节码文件已经存在了，代理类和委托类的关系在运行前就已经确定了。我们上面章节介绍的就是静态代理，所以在这里就不再介绍静态代理了。下面我们介绍动态代理。</p>
+<h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4><p>动态代理类的源码是在程序运行期间由 JVM 根据反射机制动态生成的，所以不存在代理类的字节码文件，代理类和委托类的关系是在程序运行时确定的。<br>与动态代理类有关的 Java API 有： Proxy 类和 InvocationHandler 类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Proxy类的静态方法</span></span><br><span class="line"><span class="comment">// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器  </span></span><br><span class="line"><span class="function"><span class="keyword">static</span> InvocationHandler <span class="title">getInvocationHandler</span><span class="params">(Object proxy)</span>   </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象  </span></span><br><span class="line"><span class="keyword">static</span> Class <span class="title">getProxyClass</span><span class="params">(ClassLoader loader, Class[] interfaces)</span>   </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 方法 3：该方法用于判断指定类对象是否是一个动态代理类  </span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isProxyClass</span><span class="params">(Class cl)</span>   </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例  </span></span><br><span class="line"><span class="keyword">static</span> Object <span class="title">newProxyInstance</span><span class="params">(ClassLoader loader, Class[] interfaces, InvocationHandler h)</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//InvocationHandler的核心方法 </span></span><br><span class="line"><span class="comment">// 该方法负责集中处理动态代理类上的所有方法调用。第一个参数既是代理类实例，第二个参数是被调用的方法对象  </span></span><br><span class="line"><span class="comment">// 第三个方法是调用参数。调用处理器根据这三个参数进行预处理或分派到委托类实例上反射执行  </span></span><br><span class="line">Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span>     </span></span><br></pre></td></tr></table></figure><br>下面是动态代理的一个示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUser</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 判断用户的权限</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> uid 用户的UID</span><br><span class="line">     * <span class="doctag">@return</span> 是否认证通过</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isAuthUser</span><span class="params">(<span class="keyword">int</span> uid)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserImpl</span> <span class="keyword">implements</span> <span class="title">IUser</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAuthUser</span><span class="params">(<span class="keyword">int</span> uid)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//做一些权限验证的工作</span></span><br><span class="line">        System.out.println(uid);</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserJDKProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 需要代理的类</span></span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 绑定委托对象并返回一个代理类 ClassLoader loader：类加载器 Class&lt;?&gt;[] interfaces：得到全部的接口 InvocationHandler</span><br><span class="line">     * h：得到InvocationHandler接口的子类实例</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span> target</span><br><span class="line">     * <span class="doctag">@return</span></span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">initUserJDKProxy</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">        <span class="comment">// 可以看出这里的第二个参数是获取接口，那么也就是说我们实现代理，需要类去实现接口，在有的时候，类是没有接口的，所以这里是一个缺陷</span></span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"proxy:这里拦截处理一下事情....,如监控参数、插入日志...."</span>);</span><br><span class="line">        <span class="comment">//传入处理对象和参数</span></span><br><span class="line">        Object object = method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">"proxy:这里做一些收尾工作...."</span>);</span><br><span class="line">        <span class="keyword">return</span> object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//客户端调用</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">authUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    UserJDKProxy userJDKProxy = <span class="keyword">new</span> UserJDKProxy();</span><br><span class="line">    IUser iUser = (IUser) userJDKProxy.initUserJDKProxy(<span class="keyword">new</span> UserImpl());</span><br><span class="line">    iUser.isAuthUser(<span class="number">19</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以看到动态代理类通过一个代理类来代理多个委托类，接口中声明的所有方法都被转移到了 InvocationHandler 的 invoke 方法中去处理了，这样可以在 invoke 方法中统一做一些事情，例如 Spring 的 AOP 实现原理就是动态代理。但是动态代理也有美中不足的缺点，那就是动态代理只能代理接口，这是因为动态生成的代理类已经默认继承了 Proxy 类，所以不能代理 class 了。</p>
+<h3 id="Android-源码中的代理模式"><a href="#Android-源码中的代理模式" class="headerlink" title="Android 源码中的代理模式"></a>Android 源码中的代理模式</h3><p>代理模式在 Android 源码中最典型的应用当属 IPC 中的 AIDL 了，对于 AIDL 不熟悉的同学可以点击查看<a href="http://weiqianghu.github.io/2016/08/01/Android-Studio-AIDL-%E5%AE%9E%E6%88%98/">Android Studio AIDL 实战</a> 。 Android 源码中有很多 ManagerService 和很多 Manager ，其中它们之间的通信就是 Binder ，当然也会涉及到代理模式。例如 ActivityManagerNative 、 ActivityManagerService 和 ActivityManagerProxy 。下面我们就缕一缕这三者之间的关系。<br>首先是 ActivityManagerNative 类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityManagerNative</span> <span class="keyword">extends</span> <span class="title">Binder</span> <span class="keyword">implements</span> <span class="title">IActivityManager</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">public</span> IActivityManager <span class="title">asInterface</span><span class="params">(IBinder obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        IActivityManager in =</span><br><span class="line">            (IActivityManager)obj.queryLocalInterface(descriptor);</span><br><span class="line">        <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> in;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ActivityManagerProxy(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTransact</span><span class="params">(<span class="keyword">int</span> code, Parcel data, Parcel reply, <span class="keyword">int</span> flags)</span></span><br><span class="line">            <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (code) &#123;</span><br><span class="line">        <span class="keyword">case</span> START_ACTIVITY_TRANSACTION:</span><br><span class="line">        &#123;</span><br><span class="line">           <span class="comment">//....</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> START_ACTIVITY_AS_USER_TRANSACTION:</span><br><span class="line">        &#123;</span><br><span class="line">           <span class="comment">//.....</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">asBinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ActivityManagerProxy</span> <span class="keyword">implements</span> <span class="title">IActivityManager</span></span>&#123;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="title">ActivityManagerProxy</span><span class="params">(IBinder remote)</span></span><br><span class="line">    	</span>&#123;</span><br><span class="line">        	mRemote = remote;</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	<span class="function"><span class="keyword">public</span> IBinder <span class="title">asBinder</span><span class="params">()</span></span><br><span class="line">    	</span>&#123;</span><br><span class="line">        	<span class="keyword">return</span> mRemote;</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">startActivity</span><span class="params">(IApplicationThread caller, String callingPackage, Intent intent,</span><br><span class="line">            String resolvedType, IBinder resultTo, String resultWho, <span class="keyword">int</span> requestCode,</span><br><span class="line">            <span class="keyword">int</span> startFlags, ProfilerInfo profilerInfo, Bundle options)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">        	<span class="comment">//...</span></span><br><span class="line">        	<span class="keyword">return</span> result;</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">startActivityAsUser</span><span class="params">(IApplicationThread caller, String callingPackage, Intent intent,</span><br><span class="line">            	String resolvedType, IBinder resultTo, String resultWho, <span class="keyword">int</span> requestCode,</span><br><span class="line">            	<span class="keyword">int</span> startFlags, ProfilerInfo profilerInfo, Bundle options,</span><br><span class="line">            	<span class="keyword">int</span> userId)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">        	<span class="comment">//....</span></span><br><span class="line">        	<span class="keyword">return</span> result;</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>如果看过我这篇文章<a href="http://weiqianghu.github.io/2016/08/01/Android-Studio-AIDL-%E5%AE%9E%E6%88%98/">Android Studio AIDL 实战</a> 或者对于 AIDL 比较熟悉的话大家应该能感觉到 ActivityManagerNative 的结构和 通过 AIDL 生成的类几乎是一模一样，这也说明了 ActivityManagerService 和 ActivityManager 的通信就是采用了 Binder 。和 AIDL 生成的类一样， ActivityManagerProxy 就是  ActivityManagerNative 的内部类。 ActivityManagerNative 是抽象类，而它的实现类正是 ActivityManagerService 。它们三者的关系如下图所示：<br>{asset_img activity_manager_proxy.png}<br>通过上图可以看到 ActivityManagerProxy 和 ActivityManagerNative 都实现了 IActivityManager 接口，严格来说 ActivityManagerProxy 就是代理， ActivityManagerNative 就是委托，但是由于 ActivityManagerNative 是个抽象类，它的具体实现是 ActivityManagerService ，所以说 ActivityManagerProxy 代理的是 ActivityManagerService。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>代理模式应用广泛，通过使用代理模式可以极大的提高代码的扩展性，降低耦合度。但是若大量使用代理模式则会生成数量众多的代理类，为了减少代理类的数量可以使用动态代理。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/设计模式之观察者模式/" rel="next" title="设计模式之观察者模式">
+                <i class="fa fa-chevron-left"></i> 设计模式之观察者模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/09/设计模式之代理模式/"
+           data-title="设计模式之代理模式" data-url="http://weiqianghu.github.io/2016/10/09/设计模式之代理模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
+               alt="Weiqianghu" />
+          <p class="site-author-name" itemprop="name">Weiqianghu</p>
+          <p class="site-description motion-element" itemprop="description">珍惜现在拥有的，因为它随时都可能失去</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式的定义和使用场景"><span class="nav-number">1.</span> <span class="nav-text">代理模式的定义和使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式-UML-和示例代码"><span class="nav-number">2.</span> <span class="nav-text">代理模式 UML 和示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态代理和动态代理"><span class="nav-number">3.</span> <span class="nav-text">静态代理和动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态代理"><span class="nav-number">3.1.</span> <span class="nav-text">静态代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态代理"><span class="nav-number">3.2.</span> <span class="nav-text">动态代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-源码中的代理模式"><span class="nav-number">4.</span> <span class="nav-text">Android 源码中的代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weiqianghu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"weiqianghu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
