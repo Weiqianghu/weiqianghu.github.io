@@ -1,0 +1,639 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WEIQIANGHU BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="作为 Android 开发者，适配器模式的使用率非常高，无论是 ListView 还是 RecyclerView 都需要 Adapter ，上一篇博客设计模式之代理模式 开篇有一句话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。这句话也适用于我们今天要学习的适配器模式，其中对象的适配器模式就是代理模式的应用。这篇文章将介绍适配器模式的概念、类的适配器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之适配器模式">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/10/10/设计模式之适配器模式/index.html">
+<meta property="og:site_name" content="WEIQIANGHU BLOG">
+<meta property="og:description" content="作为 Android 开发者，适配器模式的使用率非常高，无论是 ListView 还是 RecyclerView 都需要 Adapter ，上一篇博客设计模式之代理模式 开篇有一句话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。这句话也适用于我们今天要学习的适配器模式，其中对象的适配器模式就是代理模式的应用。这篇文章将介绍适配器模式的概念、类的适配器">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/10/设计模式之适配器模式/class_adapter_uml.png">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/10/设计模式之适配器模式/object_adapter_uml.png">
+<meta property="og:updated_time" content="2016-10-10T09:09:47.194Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之适配器模式">
+<meta name="twitter:description" content="作为 Android 开发者，适配器模式的使用率非常高，无论是 ListView 还是 RecyclerView 都需要 Adapter ，上一篇博客设计模式之代理模式 开篇有一句话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。这句话也适用于我们今天要学习的适配器模式，其中对象的适配器模式就是代理模式的应用。这篇文章将介绍适配器模式的概念、类的适配器">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/10/10/设计模式之适配器模式/class_adapter_uml.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 设计模式之适配器模式 | WEIQIANGHU BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WEIQIANGHU BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                设计模式之适配器模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T14:34:48+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/设计模式之适配器模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/设计模式之适配器模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>作为 Android 开发者，适配器模式的使用率非常高，无论是 ListView 还是 RecyclerView 都需要 Adapter ，上一篇博客<a href="http://weiqianghu.github.io/2016/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式之代理模式</a> 开篇有一句话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。这句话也适用于我们今天要学习的适配器模式，其中对象的适配器模式就是代理模式的应用。这篇文章将介绍适配器模式的概念、类的适配器、对象的适配器、适配器的简单实现以及 Android 源码中的适配器模式。<br><a id="more"></a></p>
+<h3 id="适配器模式的定义和使用场景"><a href="#适配器模式的定义和使用场景" class="headerlink" title="适配器模式的定义和使用场景"></a>适配器模式的定义和使用场景</h3><p>适配器模式把一个类的接口转换成客户端所期待的另一个接口，从而使原本因接口不匹配而不能在一起工作的两个类能够在一起工作。<br>适配器在生活中最经典的应用就属我们日常生活中不可或缺的电脑和手机的适配器了。我们都知道一般情况下，我们家里的插座的输出电压都是 220V ，但是手机和笔记本电脑的输入电压不可能有这么高，所以在给笔记本电脑和手机充电时都需要相应的适配器，这就是适配器模式在生活中的应用。</p>
+<h3 id="类的适配器和对象的适配器"><a href="#类的适配器和对象的适配器" class="headerlink" title="类的适配器和对象的适配器"></a>类的适配器和对象的适配器</h3><p>其实类的适配器和对象的适配器的原理和本质是一样的，它们都是适配器模式（废话），只是它们的实现方式不同，其中类的适配器模式是用继承实现的，而对象的适配器模式是用组合来实现的，在 Java 中因为不支持多继承，因此我们建议使用对象的适配器实现，这也是 Java 编程中的一个原则，即多用组合少用继承。</p>
+<h5 id="类的适配器"><a href="#类的适配器" class="headerlink" title="类的适配器"></a>类的适配器</h5><img src="/2016/10/10/设计模式之适配器模式/class_adapter_uml.png" alt="class_adapter_uml.png" title="">
+<p>从上图可以看到，类的适配器通过实现 Target 接口并且继承 Adaptee 类来实现接口的转换。下面是类的适配器的简单示例代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 这是源类Adaptee也有的方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation1</span><span class="params">()</span></span>; </span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 这是源类Adapteee没有的方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation2</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Adaptee</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 由于源类Adaptee没有方法sampleOperation2()</span><br><span class="line">     * 因此适配器补充上这个方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//写相关的代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="对象的适配器"><a href="#对象的适配器" class="headerlink" title="对象的适配器"></a>对象的适配器</h5><img src="/2016/10/10/设计模式之适配器模式/object_adapter_uml.png" alt="object_adapter_uml.png" title="">
+<p>可以看到对象的适配器模式与类的适配器模式的最大不同就是类的适配器中 Adapter 是继承 Adaptee 的，而对象的适配器则有所不同，在对象的适配器模式中 Adapter 没有继承 Adaptee 而有 Adaptee 的引用，这就是对象的适配器和类的适配器的区别。可以看到对象的适配器和我们上篇博客介绍的代理模式有着异曲同工之处。下面是对象的适配器的示例代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 这是源类Adaptee也有的方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation1</span><span class="params">()</span></span>; </span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 这是源类Adapteee没有的方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation2</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation1</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Adaptee adaptee)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = adaptee;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 源类Adaptee有方法sampleOperation1</span><br><span class="line">     * 因此适配器类直接委派即可</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee.sampleOperation1();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 源类Adaptee没有方法sampleOperation2</span><br><span class="line">     * 因此由适配器类需要补充此方法</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sampleOperation2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//写相关的代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Android-源码中的适配器"><a href="#Android-源码中的适配器" class="headerlink" title="Android 源码中的适配器"></a>Android 源码中的适配器</h3><p>Android 源码中对于适配器模式的应用当属 ListView 了，但是 ListView 中对于适配器模式的使用和经典的适配器模式是不同的。我们知道 ListView 的 Item 布局的样式和数据集都是千变万化的，怎么将这些千变万化的样式和数据集进行统一这就是 ListView 的 Adapter 要做的事了。 ListView 将 Adapter 暴露给用户进行实现，用户在 Adapter 的 getView 方法中返回各式各样的 View ，最后用户只要将自定义的 Adapter 设置给 ListView , ListView 就可以将用户设置的 View 进行绘制出来。<br>我们发现 Adapter 的成员变量定义在 ListView 的父类 AbsListView 中，下面我们看一下 AbsListView 的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbsListView</span> <span class="keyword">extends</span> <span class="title">AdapterView</span>&lt;<span class="title">ListAdapter</span>&gt; <span class="keyword">implements</span> <span class="title">TextWatcher</span>,</span><br><span class="line">        <span class="title">ViewTreeObserver</span>.<span class="title">OnGlobalLayoutListener</span>, <span class="title">Filter</span>.<span class="title">FilterListener</span>,</span><br><span class="line">        <span class="title">ViewTreeObserver</span>.<span class="title">OnTouchModeChangeListener</span>,</span><br><span class="line">        <span class="title">RemoteViewsAdapter</span>.<span class="title">RemoteAdapterConnectionCallback</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onAttachedToWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onAttachedToWindow();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> ViewTreeObserver treeObserver = getViewTreeObserver();</span><br><span class="line">        treeObserver.addOnTouchModeChangeListener(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (mTextFilterEnabled &amp;&amp; mPopup != <span class="keyword">null</span> &amp;&amp; !mGlobalLayoutListenerAddedFilter) &#123;</span><br><span class="line">            treeObserver.addOnGlobalLayoutListener(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mAdapter != <span class="keyword">null</span> &amp;&amp; mDataSetObserver == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mDataSetObserver = <span class="keyword">new</span> AdapterDataSetObserver();</span><br><span class="line">            mAdapter.registerDataSetObserver(mDataSetObserver);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Data may have changed while we were detached. Refresh.</span></span><br><span class="line">            mDataChanged = <span class="keyword">true</span>;</span><br><span class="line">            mOldItemCount = mItemCount;</span><br><span class="line">            mItemCount = mAdapter.getCount();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onLayout(changed, l, t, r, b);</span><br><span class="line"></span><br><span class="line">        mInLayout = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> childCount = getChildCount();</span><br><span class="line">        <span class="keyword">if</span> (changed) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">                getChildAt(i).forceLayout();</span><br><span class="line">            &#125;</span><br><span class="line">            mRecycler.markChildrenDirty();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        layoutChildren();</span><br><span class="line">        mInLayout = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        mOverscrollMax = (b - t) / OVERSCROLL_LIMIT_DIVISOR;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> Move somewhere sane. This doesn't belong in onLayout().</span></span><br><span class="line">        <span class="keyword">if</span> (mFastScroll != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mFastScroll.onItemCountChanged(getChildCount(), mItemCount);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getChildCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mChildrenCount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以看到在 AbsListView 的 onAttachedToWindow 方法中会调用 Adapter 的 getCount 方法获取元素的个数，在 onLayout 方法中会调用 layoutChildren 方法进行子元素的布局， layoutChildren 方法 AbsListView 并没有进行实现，而是由具体的子类实现的，在 ListView 的 layoutChildren 方法中会根据 mLayoutMode 的不同分为由上到下布局和由下到上布局，我们看一下由上到下布局 fillDown ：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> View <span class="title">fillDown</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> nextTop)</span> </span>&#123;</span><br><span class="line">       View selectedView = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> end = (mBottom - mTop);</span><br><span class="line">       <span class="keyword">if</span> ((mGroupFlags &amp; CLIP_TO_PADDING_MASK) == CLIP_TO_PADDING_MASK) &#123;</span><br><span class="line">           end -= mListPadding.bottom;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span> (nextTop &lt; end &amp;&amp; pos &lt; mItemCount) &#123;</span><br><span class="line">           <span class="comment">// is this the selected item?</span></span><br><span class="line">           <span class="keyword">boolean</span> selected = pos == mSelectedPosition;</span><br><span class="line">           View child = makeAndAddView(pos, nextTop, <span class="keyword">true</span>, mListPadding.left, selected);</span><br><span class="line"></span><br><span class="line">           nextTop = child.getBottom() + mDividerHeight;</span><br><span class="line">           <span class="keyword">if</span> (selected) &#123;</span><br><span class="line">               selectedView = child;</span><br><span class="line">           &#125;</span><br><span class="line">           pos++;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       setVisibleRangeHint(mFirstPosition, mFirstPosition + getChildCount() - <span class="number">1</span>);</span><br><span class="line">       <span class="keyword">return</span> selectedView;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><br>可以看到 fillDown 中又调用了 makeAndAddView 方法，我们再看看 makeAndAddView 方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> View <span class="title">makeAndAddView</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">int</span> y, <span class="keyword">boolean</span> flow, <span class="keyword">int</span> childrenLeft,</span><br><span class="line">           <span class="keyword">boolean</span> selected)</span> </span>&#123;</span><br><span class="line">       View child;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (!mDataChanged) &#123;</span><br><span class="line">           <span class="comment">// Try to use an existing view for this position</span></span><br><span class="line">           child = mRecycler.getActiveView(position);</span><br><span class="line">           <span class="keyword">if</span> (child != <span class="keyword">null</span>) &#123;</span><br><span class="line">               <span class="comment">// Found it -- we're using an existing child</span></span><br><span class="line">               <span class="comment">// This just needs to be positioned</span></span><br><span class="line">               setupChild(child, position, y, flow, childrenLeft, selected, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">               <span class="keyword">return</span> child;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// Make a new view for this position, or convert an unused view if possible</span></span><br><span class="line">       child = obtainView(position, mIsScrap);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// This needs to be positioned and measured</span></span><br><span class="line">       setupChild(child, position, y, flow, childrenLeft, selected, mIsScrap[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> child;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">RecycleBin</span> </span>&#123;</span><br><span class="line">       <span class="keyword">private</span> RecyclerListener mRecyclerListener;</span><br><span class="line"></span><br><span class="line">       <span class="comment">/**</span><br><span class="line">        * The position of the first view stored in mActiveViews.</span><br><span class="line">        */</span></span><br><span class="line">       <span class="keyword">private</span> <span class="keyword">int</span> mFirstActivePosition;</span><br><span class="line"></span><br><span class="line">       <span class="comment">/**</span><br><span class="line">        * Views that were on screen at the start of layout. This array is populated at the start of</span><br><span class="line">        * layout, and at the end of layout all view in mActiveViews are moved to mScrapViews.</span><br><span class="line">        * Views in mActiveViews represent a contiguous range of Views, with position of the first</span><br><span class="line">        * view store in mFirstActivePosition.</span><br><span class="line">        */</span></span><br><span class="line">       <span class="keyword">private</span> View[] mActiveViews = <span class="keyword">new</span> View[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="comment">/**</span><br><span class="line">        * Unsorted views that can be used by the adapter as a convert view.</span><br><span class="line">        */</span></span><br><span class="line">       <span class="keyword">private</span> ArrayList&lt;View&gt;[] mScrapViews;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//....</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><br>可以看到在 makeAndAddView 方法中首先调用了 mRecycler.getActiveView 去获取 View 其中 mRecycler 的类型是 RecycleBin ， 在 RecycleBin 中维护着好几个 View List ，其中 mActiveViews 就是其中一个，我们从上面的注释可以看到 mActiveViews 中存储的是当前屏幕可见的 View ，只要 View 一移出当前屏幕，那么这个 View 就会被移动到 mScrapViews 中，这就是我们熟悉的 ListView 中的 View 复用原理。如果在 mActiveViews 没有找到相应的 View 就会进一步调用 obtainView 方法，obtainView 定义在 AbsListView 中，下面我们看一下 obtainView 方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">View <span class="title">obtainView</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">boolean</span>[] isScrap)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">        <span class="keyword">final</span> View transientView = mRecycler.getTransientStateView(position);</span><br><span class="line">        <span class="keyword">if</span> (transientView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">final</span> LayoutParams params = (LayoutParams) transientView.getLayoutParams();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// If the view type hasn't changed, attempt to re-bind the data.</span></span><br><span class="line">            <span class="keyword">if</span> (params.viewType == mAdapter.getItemViewType(position)) &#123;</span><br><span class="line">                <span class="keyword">final</span> View updatedView = mAdapter.getView(position, transientView, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// If we failed to re-bind the data, scrap the obtained view.</span></span><br><span class="line">                <span class="keyword">if</span> (updatedView != transientView) &#123;</span><br><span class="line">                    setItemViewLayoutParams(updatedView, position);</span><br><span class="line">                    mRecycler.addScrapView(updatedView, position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Scrap view implies temporary detachment.</span></span><br><span class="line">            isScrap[<span class="number">0</span>] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span> transientView;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> View scrapView = mRecycler.getScrapView(position);</span><br><span class="line">        <span class="keyword">final</span> View child = mAdapter.getView(position, scrapView, <span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">        <span class="keyword">return</span> child;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">View <span class="title">getScrapView</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mViewTypeCount == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> retrieveFromScrap(mCurrentScrap, position);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">final</span> <span class="keyword">int</span> whichScrap = mAdapter.getItemViewType(position);</span><br><span class="line">                <span class="keyword">if</span> (whichScrap &gt;= <span class="number">0</span> &amp;&amp; whichScrap &lt; mScrapViews.length) &#123;</span><br><span class="line">                    <span class="keyword">return</span> retrieveFromScrap(mScrapViews[whichScrap], position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure><br>从上面的代码我们发现在获取 View 时首先是去 mTransientStateViews 中找， mTransientStateViews 中存储的是一些已移出屏幕但是 View 具有瞬时态（Transient），例如在播放动画的 View 。具有瞬时态的 View 移出屏幕后不会被移动到 mScrapViews 中，页就是说具有瞬时态的 View 在移除屏幕后会将其移动到 mTransientStateViews 中以备复用，而普通的 View 会被移动到 mScrapViews 以备复用，后面的逻辑就非常简单了，如果不是瞬时态的 View 就会去 mScrapViews 中找可以复用的 View ，如果在 mScrapViews 中存在可以被复用的 View 那么我们定义的 Adapter 的 getView 方法的 convertView 参数就不是 null 了… 后面的事情我们都知道了，这就是 ListView 中 View 复用的原理。在 makeAndAddView 中最后拿到 View 之后就会调用 setupChild 方法将这个 View 布局到特定的位置。这就是 ListView 中的适配器模式的应用。其中 ListView 还应用了观察者模式，详情可见我的文章<a href="http://weiqianghu.github.io/2016/09/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">设计模式之观察者模式</a> 。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>适配器模式的好处我们就不说了，我们理一理 ListView 中的适配器模式。 ListView 等列表控件通过 Adapter 来获取 Item View 的数量、布局、数据等。在 Adapter 的 getView 方法返回一个 View 的抽象，而千变万化的视图都是 View 的子类，通过这种方式保证了 AbsListView 的高度可定制化。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/09/设计模式之代理模式/" rel="next" title="设计模式之代理模式">
+                <i class="fa fa-chevron-left"></i> 设计模式之代理模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/10/设计模式之适配器模式/"
+           data-title="设计模式之适配器模式" data-url="http://weiqianghu.github.io/2016/10/10/设计模式之适配器模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
+               alt="Weiqianghu" />
+          <p class="site-author-name" itemprop="name">Weiqianghu</p>
+          <p class="site-description motion-element" itemprop="description">珍惜现在拥有的，因为它随时都可能失去</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的定义和使用场景"><span class="nav-number">1.</span> <span class="nav-text">适配器模式的定义和使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的适配器和对象的适配器"><span class="nav-number">2.</span> <span class="nav-text">类的适配器和对象的适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类的适配器"><span class="nav-number">2.0.1.</span> <span class="nav-text">类的适配器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象的适配器"><span class="nav-number">2.0.2.</span> <span class="nav-text">对象的适配器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-源码中的适配器"><span class="nav-number">3.</span> <span class="nav-text">Android 源码中的适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weiqianghu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div class="theme-info">
+  <span id="busuanzi_container_page_pv">
+    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"weiqianghu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

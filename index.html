@@ -265,6 +265,109 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/10/设计模式之适配器模式/" itemprop="url">
+                  设计模式之适配器模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T14:34:48+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/设计模式之适配器模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/设计模式之适配器模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>作为 Android 开发者，适配器模式的使用率非常高，无论是 ListView 还是 RecyclerView 都需要 Adapter ，上一篇博客<a href="http://weiqianghu.github.io/2016/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式之代理模式</a> 开篇有一句话：软件开发中遇到的所有问题，都可以通过增加一层抽象而得以解决，如果不行就再加一层（开个玩笑）。这句话也适用于我们今天要学习的适配器模式，其中对象的适配器模式就是代理模式的应用。这篇文章将介绍适配器模式的概念、类的适配器、对象的适配器、适配器的简单实现以及 Android 源码中的适配器模式。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/10/设计模式之适配器模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/09/设计模式之代理模式/" itemprop="url">
                   设计模式之代理模式
                 </a>
@@ -1171,109 +1274,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/19/不为人知的RemoteViews/" itemprop="url">
-                  不为人知的 RemoteViews
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-19T11:50:24+08:00" content="2016-08-19">
-              2016-08-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/19/不为人知的RemoteViews/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/不为人知的RemoteViews/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>可能标题党了，应该是我们在日常开发中很少会接触到它，这篇文章将首先介绍一下 RemoteViews 在通知栏和桌面小部件的的应用，然后会分析 RemoteViews 的内部机制。那么什么是 RemoteViews 呢？ RemoteViews 表示的是一个 View 的结构，它的功能就是用来跨进程更新界面，主要的应用就是桌面小组件和通知栏。<br>RemoteViews 在实际开发中主要应用在通知栏和桌面小组件。通知栏主要通过 NotificationManager 的 notify 方法实现，它既可以使用默认效果也可以自定义布局。桌面小部件则通过 AppWidgetProvider 实现， Approvider 本质上是一个广播。那么为什么它们更新界面都需要 RemoteViews 呢？那是因为二者的界面都运行在其他进程中（SystemServer进程）。因此他们的界面更新都需要 RemoteViews 。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/19/不为人知的RemoteViews/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1319,7 +1319,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
