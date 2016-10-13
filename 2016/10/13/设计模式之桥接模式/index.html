@@ -92,10 +92,13 @@
 <meta property="og:url" content="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
 <meta property="og:description" content="在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 支蜡笔同样的功能。如果增加一种新型号的画笔，并且也需要">
-<meta property="og:updated_time" content="2016-10-13T01:58:34.383Z">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/bridge_uml.gif">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/mao_bi.gif">
+<meta property="og:updated_time" content="2016-10-13T02:50:59.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之桥接模式">
 <meta name="twitter:description" content="在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 支蜡笔同样的功能。如果增加一种新型号的画笔，并且也需要">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/bridge_uml.gif">
 
 
 
@@ -313,6 +316,17 @@
         <blockquote>
 <p>在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 支蜡笔同样的功能。如果增加一种新型号的画笔，并且也需要具有 12 种颜色，对应的蜡笔需增加 12 支，而毛笔只需增加一支。为什么会这样呢？通过分析我们可以得知：在蜡笔中，颜色和 型号两个不同的变化维度（即两个不同的变化原因）融合在一起，无论是对颜色进行扩展还是对型号进行扩展都势必会影响另一个维度；但在毛笔中，颜色和型号实现了分离，增加新的颜色或者型号对另一方都没有任何影响。如果使用软件工程中的术语，我们可以认为在蜡笔中颜色和型号之间存在较强的耦合性，而毛笔很好地将二者解耦，使用起来非常灵活，扩展也更为方便 。在软件开发中，我们也提供了一种设计模式来处理与画笔类似的具有多变化维度的情况，即本章将要介绍的桥接模式。</p>
 </blockquote>
+<a id="more"></a>
+<h3 id="桥接模式概述"><a href="#桥接模式概述" class="headerlink" title="桥接模式概述"></a>桥接模式概述</h3><p>桥接模式将抽象部分与实现部分分离。如果软件系统中存在两个独立变化的维度，通过桥接模式可以将两个维度分离出来，使两者可以独立扩展。</p>
+<h3 id="桥接模式-UML-类图"><a href="#桥接模式-UML-类图" class="headerlink" title="桥接模式 UML 类图"></a>桥接模式 UML 类图</h3><img src="/2016/10/13/设计模式之桥接模式/bridge_uml.gif" alt="bridge_uml.gif" title="">
+<p>根据上图可以看到桥接模式包括以下角色： </p>
+<ul>
+<li>Abstraction ：抽象部分，该类保持一个对实现部分的引用，抽象部分中的方法需要调用实现部分的对象来实现。</li>
+<li>RefinedAbstraction  ： 抽象部分的具体实现。</li>
+<li>Implementor : 实现部分，定义实现类的接口，这个接口不一定要与 Abstraction 的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor 接口仅提供基本操作，而 Abstraction 定义的接口可能会做更多更复杂的操作。Implementor 接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在 Abstraction 中不仅拥有自己的方法，还可以调用到 Implementor 中定义的方法，使用关联关系来替代继承关系。</li>
+<li>ConcreteImplementor ： 实现部分的具体实现，完善实现部分中方法定义的具体逻辑。</li>
+</ul>
+<h3 id="桥接模式具体实现"><a href="#桥接模式具体实现" class="headerlink" title="桥接模式具体实现"></a>桥接模式具体实现</h3><p>在使用桥接模式时，我们首先应该识别出一个类所具有的两个独立变化的维度，将它们设计为两个独立的继承等级结构，为两个维度都提供抽象层，并建立抽象耦合。通常情况下我们将独立变化的两个维度中与类的关系最为密切的维度设计为抽象部分，而将另一个维度设计为实现部分。例如我们将文章开头提到的毛笔例子中的毛笔的型号维度作为抽象部分，而将颜色维度作为实现部分，具体的设计图入下：<br><img src="/2016/10/13/设计模式之桥接模式/mao_bi.gif" alt="mao_bi.gif" title=""><br>下面我们根据上图进行代码实现：<br><figure class="highlight plain"><figcaption><span>java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//毛笔接口</span><br><span class="line">abstract class Brush &#123;  </span><br><span class="line">	protected Color mColor;</span><br><span class="line"></span><br><span class="line">	public void setColor(Color color)&#123;</span><br><span class="line">		this.mColor=color;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    public abstract void draw();  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">class LargeBrush&#123;</span><br><span class="line">	public void draw()&#123;</span><br><span class="line">		//用大号笔 mColor.getColor() 色进行绘图</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MiddleBrush&#123;</span><br><span class="line">	public void draw()&#123;</span><br><span class="line">		//用中号笔 mColor.getColor() 色进行绘图</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class SmallBrush&#123;</span><br><span class="line">	public void draw()&#123;</span><br><span class="line">		//用小号笔 mColor.getColor() 色进行绘图</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Color &#123;</span><br><span class="line">	String getColor();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class RedColor()&#123;</span><br><span class="line">	String getColor()&#123;</span><br><span class="line">		return &quot;red&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class BlueColor()&#123;</span><br><span class="line">	String getColor()&#123;</span><br><span class="line">		return &quot;blue&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class GreenColor()&#123;</span><br><span class="line">	String getColor()&#123;</span><br><span class="line">		return &quot;green&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以看到通过使用桥接模式，其中一个维度的变化不会影响到另一个维度，现在无论是要增加毛笔的型号，还是要增加颜色都很容易，在桥接模式中体现了很多面向对象设计原则的思想，包括“单一职责原则”、“开闭原则”、“合成复用原则”、“里氏代换原则”、“依赖倒转原则”等。</p>
 
       
     </div>
@@ -467,7 +481,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式概述"><span class="nav-number">1.</span> <span class="nav-text">桥接模式概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式-UML-类图"><span class="nav-number">2.</span> <span class="nav-text">桥接模式 UML 类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式具体实现"><span class="nav-number">3.</span> <span class="nav-text">桥接模式具体实现</span></a></li></ol></div>
             
           </div>
         </section>
