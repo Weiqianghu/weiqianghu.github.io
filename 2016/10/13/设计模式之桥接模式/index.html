@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！">
+<meta name="description" content="在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = &amp;gt; 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 &amp;gt; 支蜡笔同样的功能。如果增加一种新型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软键盘弹出时RecyclerView自动滑到底部">
-<meta property="og:url" content="http://weiqianghu.github.io/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/index.html">
+<meta property="og:title" content="设计模式之桥接模式">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/index.html">
 <meta property="og:site_name" content="WEIQIANGHU BLOG">
-<meta property="og:description" content="最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！">
-<meta property="og:updated_time" content="2016-06-08T09:14:20.043Z">
+<meta property="og:description" content="在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = &amp;gt; 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 &amp;gt; 支蜡笔同样的功能。如果增加一种新型">
+<meta property="og:updated_time" content="2016-10-13T01:54:28.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软键盘弹出时RecyclerView自动滑到底部">
-<meta name="twitter:description" content="最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！">
+<meta name="twitter:title" content="设计模式之桥接模式">
+<meta name="twitter:description" content="在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = &amp;gt; 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 &amp;gt; 支蜡笔同样的功能。如果增加一种新型">
 
 
 
@@ -113,7 +113,7 @@
   };
 </script>
 
-  <title> 软键盘弹出时RecyclerView自动滑到底部 | WEIQIANGHU BLOG </title>
+  <title> 设计模式之桥接模式 | WEIQIANGHU BLOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +263,7 @@
             
             
               
-                软键盘弹出时RecyclerView自动滑到底部
+                设计模式之桥接模式
               
             
           </h1>
@@ -275,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-26T15:11:43+08:00" content="2016-05-26">
-              2016-05-26
+            <time itemprop="dateCreated" datetime="2016-10-13T09:33:44+08:00" content="2016-10-13">
+              2016-10-13
             </time>
           </span>
 
@@ -286,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/26/软键盘弹出时RecyclerView自动滑到底部/" itemprop="commentsCount"></span>
+                <a href="/2016/10/13/设计模式之桥接模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/设计模式之桥接模式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -310,12 +310,9 @@
       
 
       
-        <p>最近公司中要做一个聊天页面，在这个页面中软键盘弹出时要让输入框和消息界面上移。很多同学看到这里应该觉得很简单吧，哪我们就试一试吧！<br><a id="more"></a></p>
-<h2 id="利用ListView实现聊天界面"><a href="#利用ListView实现聊天界面" class="headerlink" title="利用ListView实现聊天界面"></a>利用ListView实现聊天界面</h2><h3 id="设置windowSoftInputMode"><a href="#设置windowSoftInputMode" class="headerlink" title="设置windowSoftInputMode"></a>设置windowSoftInputMode</h3><p>在AndroidMnanifest.xml中相应的Activity加上Android:windowSoftInputMode=”adjustResize”</p>
-<h3 id="设置ListView中transcriptMode"><a href="#设置ListView中transcriptMode" class="headerlink" title="设置ListView中transcriptMode"></a>设置ListView中transcriptMode</h3><p>在布局文件中的ListView中加入android:transcriptMode=”normal”</p>
-<p>通过以上步骤利用ListView实现的聊天界面就可以在软键盘弹出时正常工作了。但是作为一名有追求的Android开发工程师怎么会满足于<br>利用ListView呢？应该利用功能更加强大，更加灵活的RecyclerView来实现啊！</p>
-<h2 id="利用RecyclerView实现聊天界面"><a href="#利用RecyclerView实现聊天界面" class="headerlink" title="利用RecyclerView实现聊天界面"></a>利用RecyclerView实现聊天界面</h2><p>利用RecyclerView实现聊天界面的步骤和ListView基本一致，但是软键盘弹出时怎么让消息列表自动滑到底部呢？各位同学可以试一试<br>RecyclerView没有ListView中的transcriptMode属性。那么在RecyclerView中该怎么做呢？<br>RecyclerView没有这个属性，那么我们只能想别的办法了，最容易想到的办法就是监听软键盘是否弹出，然后手动滚动了，其实这是一个不错的办法，<br>但是Android中不能直接监听软键盘是否弹出，若用这种方法写的代码一点都不够优雅。<br>因此只能另想它法了，既然没办法哪就只能求助于Google了，终于最后让我给找到解决办法了。其实很好办，只需要一句代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);</span><br><span class="line">LinearLayoutManager layoutManager = <span class="keyword">new</span> LinearLayoutManager(mContext);</span><br><span class="line">layoutManager.setStackFromEnd(<span class="keyword">true</span>);</span><br><span class="line">mRecyclerView.setLayoutManager(layoutManager);</span><br><span class="line">mRecyclerView.setHasFixedSize(<span class="keyword">true</span>);</span><br><span class="line">mAdapter = <span class="keyword">new</span> ChatMessageAdapter(mData, mContext);</span><br><span class="line">mRecyclerView.setAdapter(mAdapter);</span><br><span class="line">mRecyclerView.setItemAnimator(<span class="keyword">new</span> DefaultItemAnimator());</span><br></pre></td></tr></table></figure></p>
-<p>用过RecyclerView的同学应该已经知道了就是这句：layoutManager.setStackFromEnd(true);<br>就是这么简单，一句话搞定。</p>
+        <blockquote>
+<p>在正式介绍桥接模式之前，我先跟大家谈谈两种常见文具的区别，它们是毛笔和蜡笔。假如我们需要大中小 3 种型号的画笔，能够绘制 12 种不同的颜色，如果使用蜡笔，需要准备 3×12 = &gt; 36 支，但如果使用毛笔的话，只需要提供 3 种型号的毛笔，外加 12 个颜料盒即可，涉及到的对象个数仅为 3 + 12 = 15，远小于36，却能实现与 36 &gt; 支蜡笔同样的功能。如果增加一种新型号的画笔，并且也需要具有 12 种颜色，对应的蜡笔需增加 12 支，而毛笔只需增加一支。为什么会这样呢？通过分析我们可以得知：在蜡笔中，颜色和 &gt; 型号两个不同的变化维度（即两个不同的变化原因）融合在一起，无论是对颜色进行扩展还是对型号进行扩展都势必会影响另一个维度；但在毛笔中，颜色和型号实现了分离，增加新的颜色 &gt; 或者型号对另一方都没有任何影响。如果使用软件工程中的术语，我们可以认为在蜡笔中颜色和型号之间存在较强的耦合性，而毛笔很好地将二者解耦，使用起来非常灵活，扩展也更为方便 &gt; 。在软件开发中，我们也提供了一种设计模式来处理与画笔类似的具有多变化维度的情况，即本章将要介绍的桥接模式。</p>
+</blockquote>
 
       
     </div>
@@ -337,7 +334,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
           
         </div>
       
@@ -346,17 +343,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/26/我的第一篇博客/" rel="next" title="我的第一篇博客">
-                <i class="fa fa-chevron-left"></i> 我的第一篇博客
+              <a href="/2016/10/10/设计模式之适配器模式/" rel="next" title="设计模式之适配器模式">
+                <i class="fa fa-chevron-left"></i> 设计模式之适配器模式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/27/给TextView个别字设置点击事件和颜色/" rel="prev" title="给TextView个别字设置点击事件和颜色">
-                给TextView个别字设置点击事件和颜色 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -382,8 +375,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/26/软键盘弹出时RecyclerView自动滑到底部/"
-           data-title="软键盘弹出时RecyclerView自动滑到底部" data-url="http://weiqianghu.github.io/2016/05/26/软键盘弹出时RecyclerView自动滑到底部/">
+      <div class="ds-thread" data-thread-key="2016/10/13/设计模式之桥接模式/"
+           data-title="设计模式之桥接模式" data-url="http://weiqianghu.github.io/2016/10/13/设计模式之桥接模式/">
       </div>
     
   </div>
@@ -474,7 +467,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用ListView实现聊天界面"><span class="nav-number">1.</span> <span class="nav-text">利用ListView实现聊天界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置windowSoftInputMode"><span class="nav-number">1.1.</span> <span class="nav-text">设置windowSoftInputMode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置ListView中transcriptMode"><span class="nav-number">1.2.</span> <span class="nav-text">设置ListView中transcriptMode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用RecyclerView实现聊天界面"><span class="nav-number">2.</span> <span class="nav-text">利用RecyclerView实现聊天界面</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
