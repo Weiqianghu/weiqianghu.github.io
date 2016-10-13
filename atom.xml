@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-10-13T03:39:31.941Z</updated>
+  <updated>2016-10-13T07:46:53.559Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式之23种设计模式总结</title>
+    <link href="http://weiqianghu.github.io/2016/10/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/"/>
+    <id>http://weiqianghu.github.io/2016/10/13/设计模式之23种设计模式总结/</id>
+    <published>2016-10-13T05:57:37.000Z</published>
+    <updated>2016-10-13T07:46:53.559Z</updated>
+    
+    <content type="html">&lt;p&gt;经过一个多月的时间，终于将经典的23种设计模式结合 Android 源码学习了一遍，虽然这次集中学习设计模式的时间只有一个月不到，但是在之前，从第一次接触设计模式到看各种设计模式的书籍、看各种大牛的博客，已经一年有余。设计模式初看一般理解起来都不难，但是要把设计模式用好，学会却不容易，这也是有人说设计模式用出不大的原因。但是我却不是这样认为，我觉得要学好设计模式，学会设计模式，首先得熟悉设计模式，这是基础，只有打好了这个基础，无论是阅读 Android 源码还是阅读经典库的源码时才会有所收获，才能理解设计模式的好处。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;在这一个多月的集中学习设计模式的过程中，我也将自己的收获都写成了博客。我博客中所涉及到的设计模式都是非常常用，非常重要的设计模式，但是并不是说没有涉及的设计模式不重要，大家一样要了解。下面集是涉及到设计模式的博客：&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/07/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99/&quot;&gt;面向对象的六大原则&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&quot;&gt;单例模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B-Builder-%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之 Builder 模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之策略模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/26/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之命令模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/09/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之观察者模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之代理模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/10/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之适配器模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/10/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之桥接模式&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://weiqianghu.github.io/2016/07/14/%E5%88%A9%E7%94%A8%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%90%8C%E6%9D%A5%E6%BA%90%E7%9A%84%E6%95%B0%E6%8D%AE/&quot;&gt;利用责任链模式实现加载不同来源的数据&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;23-种设计模式汇总&quot;&gt;&lt;a href=&quot;#23-种设计模式汇总&quot; class=&quot;headerlink&quot; title=&quot;23 种设计模式汇总&quot;&gt;&lt;/a&gt;23 种设计模式汇总&lt;/h3&gt;&lt;p&gt;设计模式分为三大类：&lt;br&gt;创建型模式，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。&lt;br&gt;结构型模式，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。&lt;br&gt;行为型模式，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。&lt;br&gt;23种设计模式的关系可以用下图表示&lt;br&gt;&lt;img src=&quot;/2016/10/13/设计模式之23种设计模式总结/design_pattern.jpg&quot; alt=&quot;design_pattern.jpg&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;23-种设计模式在-Android-源码中的应用&quot;&gt;&lt;a href=&quot;#23-种设计模式在-Android-源码中的应用&quot; class=&quot;headerlink&quot; title=&quot;23 种设计模式在 Android 源码中的应用&quot;&gt;&lt;/a&gt;23 种设计模式在 Android 源码中的应用&lt;/h3&gt;&lt;p&gt;下面我们简要的介绍一下设计模式在 Android 源码中的应用&lt;br&gt;工厂方法模式： 接口 Iterable 中的 iterator 就是一个工厂方法， Activity 中的 onCreate 也可以看作是工厂方法&lt;br&gt;抽象工厂模式： MediaPlayerFactory 是一个抽象工厂&lt;br&gt;单例模式： 单例模式的应用非常广泛， Application 就是单例的， WindowManagerService 、 ActivityService 等系统级的 Service 也是单例的，具体可见 &lt;a href=&quot;http://weiqianghu.github.io/2016/09/08/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/&quot;&gt;单例模式&lt;/a&gt;&lt;br&gt;建造者模式 ：建造者模式在图片加载库中使用非常普遍，例如 Picasso 、 Glide 、UniversalImageLoader 中都有建造者模式的身影。在 Android 源码中 AlertDialog 中应用了建造者模式，详见 &lt;a href=&quot;http://weiqianghu.github.io/2016/09/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B-Builder-%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之 Builder 模式&lt;/a&gt;&lt;br&gt;原型模式：原型模式就是实现接口 Cloneable ，这个太多了。。。&lt;br&gt;适配器模式：这个不用说了， AbsListView 和 RecyclerView 都使用了适配器模式。详见：&lt;a href=&quot;http://weiqianghu.github.io/2016/10/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之适配器模式&lt;/a&gt;&lt;br&gt;装饰器模式：Context 、 ContextImpl 、 ContextWrapper 、ContextThemeWrapper&lt;br&gt;代理模式： AIDL ，ActivityProxy（其实这也是 AIDL ）&lt;br&gt;外观模式：Context 作为 Android 系统中的上帝类，封装了很多功能，这也是外观模式的应用&lt;br&gt;桥接模式：Adapter 与 AdapterView 的桥接，Window 与 WindowManager 的桥接 详见：&lt;a href=&quot;http://weiqianghu.github.io/2016/10/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之桥接模式&lt;/a&gt;&lt;br&gt;组合模式： View 、 ViewGroup&lt;br&gt;享元模式：Message 中的 MessagePool 是用链表实现的。&lt;br&gt;策略模式：动画中的 InterPolator 和 TypeEvaluator 。详见&lt;a href=&quot;http://weiqianghu.github.io/2016/08/23/Android-%E5%8A%A8%E7%94%BB%E5%88%86%E6%9E%90/&quot;&gt;Android 动画分析&lt;/a&gt;&lt;br&gt;模板方法模式: 模板模式的应用非常广泛， Android 中 AsyncTask 的几个回调可以看作模板。&lt;br&gt;观察者模式： AbsListView 和 RecyclerView 都使用了观察者模式，详见&lt;a href=&quot;http://weiqianghu.github.io/2016/09/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/&quot;&gt;设计模式之观察者模式&lt;/a&gt;&lt;br&gt;迭代子模式： 这个不用说了，在 JDK 中的集合类都是迭代子模式。&lt;br&gt;责任链模式： View 中对于事件的分发处理可以看作是责任链模式。详见&lt;a href=&quot;http://weiqianghu.github.io/2016/07/14/%E5%88%A9%E7%94%A8%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%90%8C%E6%9D%A5%E6%BA%90%E7%9A%84%E6%95%B0%E6%8D%AE/&quot;&gt;利用责任链模式实现加载不同来源的数据&lt;/a&gt;&lt;br&gt;命令模式： Android 事件的底层 NotifyArgs 就是一个命令对象。&lt;br&gt;备忘录模式： Android 的状态保存， onSaveInstanceState 、 onRestoreInstaceState&lt;br&gt;状态模式： WIFI 管理&lt;br&gt;访问者模式： Java 注解 APT&lt;br&gt;中介者模式： KeyGuard 功能的实现&lt;br&gt;解释器模式： PackageParser 中有解释器模式的影子&lt;/p&gt;
+&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;其实在 Android 源码中的设计模式并不都是经典设计模式的样子，所以我们学习设计模式也不能死读书，而是要学习设计模式的思想，灵活方便的使用设计模式。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;经过一个多月的时间，终于将经典的23种设计模式结合 Android 源码学习了一遍，虽然这次集中学习设计模式的时间只有一个月不到，但是在之前，从第一次接触设计模式到看各种设计模式的书籍、看各种大牛的博客，已经一年有余。设计模式初看一般理解起来都不难，但是要把设计模式用好，学会却不容易，这也是有人说设计模式用出不大的原因。但是我却不是这样认为，我觉得要学好设计模式，学会设计模式，首先得熟悉设计模式，这是基础，只有打好了这个基础，无论是阅读 Android 源码还是阅读经典库的源码时才会有所收获，才能理解设计模式的好处。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://weiqianghu.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式之桥接模式</title>
@@ -703,34 +727,6 @@
     
     
       <category term="Java" scheme="http://weiqianghu.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>提高Gradle构建速度</title>
-    <link href="http://weiqianghu.github.io/2016/06/08/%E6%8F%90%E9%AB%98Gradle%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6/"/>
-    <id>http://weiqianghu.github.io/2016/06/08/提高Gradle构建速度/</id>
-    <published>2016-06-08T08:47:51.000Z</published>
-    <updated>2016-06-08T09:19:48.491Z</updated>
-    
-    <content type="html">&lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;在下面的目录下面创建gradle-properties文件：&quot;&gt;&lt;a href=&quot;#在下面的目录下面创建gradle-properties文件：&quot; class=&quot;headerlink&quot; title=&quot;在下面的目录下面创建gradle.properties文件：&quot;&gt;&lt;/a&gt;在下面的目录下面创建gradle.properties文件：&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;/home/&amp;lt;username&amp;gt;/.gradle/ (Linux)
-/Users/&amp;lt;username&amp;gt;/.gradle/ (Mac)
-C:\Users\&amp;lt;username&amp;gt;\.gradle (Windows)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在gradle.properties文件中加入下面内容&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#开启守护进程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.daemon=true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Specifies the JVM arguments used for the daemon process.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# The setting is particularly useful for tweaking memory settings.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Default value: -Xmx10248m -XX:MaxPermSize=256m&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#开启并行编译&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.parallel=true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Enables new incubating mode that makes Gradle selective when configuring projects. &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Only relevant projects are configured which results in faster builds for large multi-projects.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;org.gradle.configureondemand=true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h2 id=&quot;配置Android-Studio&quot;&gt;&lt;a href=&quot;#配置Android-Studio&quot; class=&quot;headerlink&quot; title=&quot;配置Android Studio&quot;&gt;&lt;/a&gt;配置Android Studio&lt;/h2&gt;&lt;p&gt;如下图&lt;br&gt;&lt;img src=&quot;/2016/06/08/提高Gradle构建速度/as_gradle_offline.png&quot; alt=&quot;as_gradle_offline.png&quot; title=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;通过以上两个步骤可以显著提高Gradle的build速度&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;项目被拆分成多个Module之后Gradle build的速度超级慢，少则2~3分钟，多则7~8分钟，这样的速度严重影响开发人员的心情啊，今天经过简单配置Gradle build速度提升很高啊，所以在这里记录一下。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Android Gradle" scheme="http://weiqianghu.github.io/tags/Android-Gradle/"/>
     
   </entry>
   
