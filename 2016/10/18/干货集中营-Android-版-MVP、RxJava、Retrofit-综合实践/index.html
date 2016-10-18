@@ -1,0 +1,653 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RxJava," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WEIQIANGHU BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="干货集中营 分享一些技术圈儿的干货，有意思的视频图片和文章，还偶尔会推荐些靠谱的公司。MVP 、 RxJava 、 Retrofit 是 Android 开发最流行，最酷的技术，秉着学习的态度，我使用干货集中营 API 开发了一款 Android 端应用，主要使用到的技术有 MVP 、 RxJava 、 Retrofit 等。对于 RxJava 不熟悉的同学可以看看给 Android 开发者的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="干货集中营 Android 版 --- MVP、RxJava、Retrofit 综合实践">
+<meta property="og:url" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/index.html">
+<meta property="og:site_name" content="WEIQIANGHU BLOG">
+<meta property="og:description" content="干货集中营 分享一些技术圈儿的干货，有意思的视频图片和文章，还偶尔会推荐些靠谱的公司。MVP 、 RxJava 、 Retrofit 是 Android 开发最流行，最酷的技术，秉着学习的态度，我使用干货集中营 API 开发了一款 Android 端应用，主要使用到的技术有 MVP 、 RxJava 、 Retrofit 等。对于 RxJava 不熟悉的同学可以看看给 Android 开发者的">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/main.jpg">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/menu.jpg">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/detail.jpg">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/welfare.jpg">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/welfare_detail.jpg">
+<meta property="og:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/project.png">
+<meta property="og:updated_time" content="2016-10-18T08:21:26.135Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="干货集中营 Android 版 --- MVP、RxJava、Retrofit 综合实践">
+<meta name="twitter:description" content="干货集中营 分享一些技术圈儿的干货，有意思的视频图片和文章，还偶尔会推荐些靠谱的公司。MVP 、 RxJava 、 Retrofit 是 Android 开发最流行，最酷的技术，秉着学习的态度，我使用干货集中营 API 开发了一款 Android 端应用，主要使用到的技术有 MVP 、 RxJava 、 Retrofit 等。对于 RxJava 不熟悉的同学可以看看给 Android 开发者的">
+<meta name="twitter:image" content="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/main.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 干货集中营 Android 版 --- MVP、RxJava、Retrofit 综合实践 | WEIQIANGHU BLOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">WEIQIANGHU BLOG</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                干货集中营 Android 版 --- MVP、RxJava、Retrofit 综合实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-18T11:40:45+08:00" content="2016-10-18">
+              2016-10-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="http://gank.io/" target="_blank" rel="external">干货集中营</a> 分享一些技术圈儿的干货，有意思的视频图片和文章，还偶尔会推荐些靠谱的公司。<br><a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">MVP</a> 、 <a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">RxJava</a> 、 <a href="https://github.com/square/retrofit" target="_blank" rel="external">Retrofit</a> 是 Android 开发最流行，最酷的技术，秉着学习的态度，我使用<a href="http://gank.io/api" target="_blank" rel="external">干货集中营 API</a> 开发了一款 Android 端应用，主要使用到的技术有 MVP 、 RxJava 、 Retrofit 等。对于 RxJava 不熟悉的同学可以看看<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a> 学习。本篇文章将介绍这款应用的架构、涉及到的技术要点、MVP、RxJava、Retrofit 的综合实践等。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="干货应用介绍"><a href="#干货应用介绍" class="headerlink" title="干货应用介绍"></a>干货应用介绍</h3><p>下面我放几张图简要介绍一下这款应用的功能和界面。<br>首先是应用的主界面,首页基本借鉴（照抄）了知乎日报的首页，展示的主要内容是<a href="http://gank.io/" target="_blank" rel="external">干货集中营</a>的今日推荐，顶部是最近 4 天的福利。每天的推荐内容涵盖了 Android 、 iOS 、 前端等技术。<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/main.jpg" alt="main.jpg" title=""><br>接下来是抽屉菜单，菜单中按类别展示了不同的条目<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/menu.jpg" alt="menu.jpg" title=""><br>接下来是内容页面，内容页面采用了 WebView 进行展示<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/detail.jpg" alt="detail.jpg" title=""><br>下面是福利列表页，福利列表页采用 RecyclerView 实现了一个瀑布流样式的列表<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/welfare.jpg" alt="welfare.jpg" title=""><br>接下来是福利详情页，福利详情页采用了 PopupWindow 弹出的形式，展示图片采用了 PhotoView 控件，图片加载库采用的是 picasso 。<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/welfare_detail.jpg" alt="welfare_detail.jpg" title=""></p>
+<h3 id="打包结构"><a href="#打包结构" class="headerlink" title="打包结构"></a>打包结构</h3><p>首先看一下项目的打包结构：<br><img src="/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/project.png" alt="project.png" title=""></p>
+<ul>
+<li>base 包中封装了 Retrofit 、 RxJava 和 picasso 数据库、Adapter 等基础库，还定义了 BaseActivity 、 BaseFragment 等。</li>
+<li>biz 包也就是 MVP 中的 model 层。</li>
+<li>common 包定义了 Constant 、 Url 等类。</li>
+<li>entity 包中存放项目用到的实体类。</li>
+<li>presenter 包中定义了 MVP 中的 Presenter 层的代码。</li>
+<li>utils 包中定义了项目中用到的工具类。</li>
+<li>view 包中定义了 MVP 中的 view 层，包含了 项目中的 Activity 、 Fragment 、 Adapter 和 view 层的接口。</li>
+<li>widget 是项目中用到的自定义控件。<br>现在感觉代码分包还有不合理的地方，包太多太乱，很多包都可以合并，这样结构会更清楚。</li>
+</ul>
+<h3 id="Retrofit-和-RxJava-的封装"><a href="#Retrofit-和-RxJava-的封装" class="headerlink" title="Retrofit 和 RxJava 的封装"></a>Retrofit 和 RxJava 的封装</h3><p>项目中为了将 Retrofit 和 RxJava 隔离在 Http 层，所以对 Retrofit 和 RxJava 进行了封装，通过封装后 RxJava 被隔离在了 Http 层，通过这种方式使得上层代码不用直接使用 RxJava ，减小了代码的复杂度，但是缺点很明显，上层也使用不到了 RxJava 的优点，孰优孰略大家可以自己思考自己抉择。下面详细介绍一下。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonRx</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Retrofit <span class="title">initRetrofit</span><span class="params">(String baseUrl)</span> </span>&#123;</span><br><span class="line">        OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">                .readTimeout(<span class="number">60</span>, TimeUnit.SECONDS)</span><br><span class="line">                .connectTimeout(<span class="number">60</span>, TimeUnit.SECONDS)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Gson gson = <span class="keyword">new</span> GsonBuilder().setLenient().create();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                .baseUrl(baseUrl)</span><br><span class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create(gson))</span><br><span class="line">                .client(okHttpClient)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>CommonRx 类只有一个方法 initRetrofit ，需要传入参数 baseUrl 进行构造 Retrofit 对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpProvider</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">HttpProvider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HttpProvider instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HttpProvider <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (HttpProvider.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> HttpProvider();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getService</span><span class="params">(String baseUrl, Class&lt;T&gt; service)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> CommonRx.initRetrofit(baseUrl).create(service);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>HttpProvider 使用了单例模式的设计，HttpProvider 中的 getService 方法调用 CommonRx 的 initRetrofit 方法创建了 service 对象。对这一块不熟悉的同学可以访问<a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit 官方文档</a> 进行学习。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CallBack</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为了隔离 RxJava ，因此封装了 CallBack 接口，它的三个回调方法和 RxJava 的三个回调方法一致。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> error;</span><br><span class="line">    <span class="keyword">public</span> List&lt;T&gt; results;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiProvider</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Observable&lt;HttpResult&lt;T&gt;&gt; observable, <span class="keyword">final</span> CallBack&lt;HttpResult&lt;T&gt;&gt; callBack)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (checkNetWork()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        observable.subscribeOn(Schedulers.io())</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(<span class="keyword">new</span> Subscriber&lt;HttpResult&lt;T&gt;&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        callBack.onCompleted();</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">                        callBack.onError(e);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(HttpResult&lt;T&gt; tHttpResult)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (tHttpResult.error) &#123;</span><br><span class="line">                            callBack.onError(<span class="keyword">new</span> HttpErrorException(<span class="string">"请求数据出错"</span>));</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            callBack.onNext(tHttpResult);</span><br><span class="line">                            onCompleted();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>根据<a href="http://gank.io/api" target="_blank" rel="external">干货集中营 API</a>的返回结果封装了 HttpResult 类。最后的调用示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CategoryService categoryService = mHttpProvider.getService(Url.URL_CATEGORY, CategoryService.class);</span><br><span class="line">ApiProvider&lt;DryGoods&gt; apiProvider = ApiProvider.getInstance();</span><br><span class="line">apiProvider.execute(categoryService.loadCategory(category, pageSize, page), callBack);</span><br></pre></td></tr></table></figure><br>可以看到最终的调用方式还是比较简单的， RxJava 和 Retrofit 都被隔离在了 Http 层，上层不需要关心 RxJava 和 Retrofit 的具体使用方法，但是劣势很明细，在这个过程中并没有使用到 RxJava 的特点，具体怎么抉择，大家可以思考。</p>
+<h3 id="MVP-实践"><a href="#MVP-实践" class="headerlink" title="MVP 实践"></a>MVP 实践</h3><p>我们选择项目中按类别查找干货的业务介绍一下项目中的 MVP 实践。<br>首先是 Model 层：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CategoryBizImpl</span> <span class="keyword">extends</span> <span class="title">BaseBiz</span>&lt;<span class="title">CategoryService</span>&gt; <span class="keyword">implements</span> <span class="title">CategoryBiz</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadData</span><span class="params">(String category, <span class="keyword">int</span> page, <span class="keyword">int</span> pageSize, CallBack&lt;HttpResult&lt;DryGoods&gt;&gt; callBack)</span> </span>&#123;</span><br><span class="line">        CategoryService categoryService = mHttpProvider.getService(Url.URL_CATEGORY, CategoryService.class);</span><br><span class="line"></span><br><span class="line">        ApiProvider&lt;DryGoods&gt; apiProvider = ApiProvider.getInstance();</span><br><span class="line">        apiProvider.execute(categoryService.loadCategory(category, pageSize, page), callBack);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>CategoryBizImpl 实现了接口 CategoryBiz ，继承于 BaseBiz ，其中 mHttpProvider 便是在 BaseBiz 中进行初始化的。在 Model 层使用 ApiProvider 向服务器请求数据，请求成功后会回调 CallBack 接口的回调方法。<br>下面是 View 层：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICategoryView</span> <span class="keyword">extends</span> <span class="title">IListView</span>&lt;<span class="title">DryGoods</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IListView</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">refreshListView</span><span class="params">(List&lt;T&gt; data)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateListView</span><span class="params">(List&lt;T&gt; data)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>ICategoryView 比较简单，它只是继承了 IListView 的 refreshListView 和 updateListView 方法。<br>最后看一下 Presenter 层：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CategoryPresenter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CategoryBiz mCategoryBiz;</span><br><span class="line">    <span class="keyword">private</span> ICategoryView mCategoryView;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CategoryPresenter</span><span class="params">(ICategoryView categoryView)</span> </span>&#123;</span><br><span class="line">        mCategoryView = categoryView;</span><br><span class="line">        mCategoryBiz = <span class="keyword">new</span> CategoryBizImpl();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initCategory</span><span class="params">(String category, <span class="keyword">int</span> pageSize)</span> </span>&#123;</span><br><span class="line">        CallBack&lt;HttpResult&lt;DryGoods&gt;&gt; callBack = <span class="keyword">new</span> CallBack&lt;HttpResult&lt;DryGoods&gt;&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(HttpResult&lt;DryGoods&gt; welfareHttpResult)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (welfareHttpResult.results.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    mCategoryView.refreshListView(welfareHttpResult.results);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        mCategoryBiz.loadData(category, <span class="number">1</span>, pageSize, callBack);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>Presenter 层连接了 Model 层和 View 层， initCategory 调用了 CategoryBiz 的 loadData 方法进行数据请求，并将 callBack 传到了 CategoryBiz ，请求数据成功后会回调 callBack 中相应的方法，在 callBack 的回调方法中调用 ICategoryView 中相应的 View 这就是项目中 MVP 的实践。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>更多内容可访问：<a href="http://weiqianghu.github.io/2016/07/14/%E5%88%A9%E7%94%A8%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%90%8C%E6%9D%A5%E6%BA%90%E7%9A%84%E6%95%B0%E6%8D%AE/">利用责任链模式实现加载不同来源的数据</a>和我的 <a href="https://github.com/Weiqianghu/DryGoodsCamp" target="_blank" rel="external">GitHub</a>。<br>这个代码最早提交是在4个月前，当时还觉得代码写的不错，可是现在回头再看真的是不忍直视，但是还是坚持把这篇博客写完了，看自己过去的代码就是最好的学习。知乎上有一个问题：<a href="https://www.zhihu.com/question/40097501" target="_blank" rel="external">看自己几年前写的代码是怎样的一种感受？</a>大家可以去领略一下。<br>不行了，看完这些代码好难受/(ㄒoㄒ)/~~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RxJava/" rel="tag">#RxJava</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/13/设计模式之23种设计模式总结/" rel="next" title="设计模式之23种设计模式总结">
+                <i class="fa fa-chevron-left"></i> 设计模式之23种设计模式总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/"
+           data-title="干货集中营 Android 版 --- MVP、RxJava、Retrofit 综合实践" data-url="http://weiqianghu.github.io/2016/10/18/干货集中营-Android-版-MVP、RxJava、Retrofit-综合实践/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/11400355?v=3&s=460"
+               alt="Weiqianghu" />
+          <p class="site-author-name" itemprop="name">Weiqianghu</p>
+          <p class="site-description motion-element" itemprop="description">珍惜现在拥有的，因为它随时都可能失去</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#干货应用介绍"><span class="nav-number">1.</span> <span class="nav-text">干货应用介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包结构"><span class="nav-number">2.</span> <span class="nav-text">打包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retrofit-和-RxJava-的封装"><span class="nav-number">3.</span> <span class="nav-text">Retrofit 和 RxJava 的封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVP-实践"><span class="nav-number">4.</span> <span class="nav-text">MVP 实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Weiqianghu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div class="theme-info">
+  <span id="busuanzi_container_page_pv">
+    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+</div>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"weiqianghu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
