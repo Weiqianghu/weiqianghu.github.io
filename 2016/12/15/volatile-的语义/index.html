@@ -94,7 +94,7 @@
 <meta property="og:description" content="volatile 是 java 中一个非常常见，功能非常强大的一个关键字，大家用的最多的地方可能就是单例模式的双重检查锁的写法中。提到 volatile ，不得不提 synchronized ， synchronized 是一个重量级锁，那么 volatile 是一个轻量级锁吗？并不是， volatile 是一个轻量级的同步关键字，那么 volatile 的语义到底是什么呢？这就是这篇文章要介绍的">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/12/15/volatile-的语义/JMM-ABS.png">
 <meta property="og:image" content="http://weiqianghu.github.io/2016/12/15/volatile-的语义/reorder_rule.png">
-<meta property="og:updated_time" content="2016-12-15T07:53:44.925Z">
+<meta property="og:updated_time" content="2016-12-15T08:01:09.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile 的语义">
 <meta name="twitter:description" content="volatile 是 java 中一个非常常见，功能非常强大的一个关键字，大家用的最多的地方可能就是单例模式的双重检查锁的写法中。提到 volatile ，不得不提 synchronized ， synchronized 是一个重量级锁，那么 volatile 是一个轻量级锁吗？并不是， volatile 是一个轻量级的同步关键字，那么 volatile 的语义到底是什么呢？这就是这篇文章要介绍的">
@@ -330,8 +330,9 @@
 <ol>
 <li>为 SingleInstance 分配内存空间</li>
 <li>调用 SingleInstance 的构造函数，初始化成员变量</li>
-<li>为 sSingleInstance 赋值<br>根据前面的知识我们知道第 2 步和第 3 步可能会重排序，这样的话有可能某个线程获取到的单例就是未完全初始化的实例，为了解决这个问题，我们用 volatile 修饰 sSingleInstance 之后，根据上面的阻止重排序规则我们知道 volatile 写和前面的一条指令不会进行重排序，所以也就不会有问题了，这就是 volatile 的妙用。其实 volatile 远不止这点用处，在 Java 提供的并发包中有很多工具类的实现基础就是 volatile ，这些大家可以进一步了解。</li>
+<li>为 sSingleInstance 赋值</li>
 </ol>
+<p>根据前面的知识我们知道第 2 步和第 3 步可能会重排序，这样的话有可能某个线程获取到的单例就是未完全初始化的实例，为了解决这个问题，我们用 volatile 修饰 sSingleInstance 之后，根据上面的阻止重排序规则我们知道 volatile 写和前面的一条指令不会进行重排序，所以也就不会有问题了，这就是 volatile 的妙用。其实 volatile 远不止这点用处，在 Java 提供的并发包中有很多工具类的实现基础就是 volatile ，这些大家可以进一步了解。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://tutorials.jenkov.com/java-concurrency/java-memory-model.html" target="_blank" rel="external">Java Memory Model</a><br><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html" target="_blank" rel="external">Java Volatile Keyword</a></p>
 
       

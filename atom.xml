@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weiqianghu.github.io/"/>
-  <updated>2016-12-15T07:53:44.925Z</updated>
+  <updated>2016-12-15T08:01:09.398Z</updated>
   <id>http://weiqianghu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://weiqianghu.github.io/2016/12/15/volatile-%E7%9A%84%E8%AF%AD%E4%B9%89/"/>
     <id>http://weiqianghu.github.io/2016/12/15/volatile-的语义/</id>
     <published>2016-12-15T02:13:09.000Z</published>
-    <updated>2016-12-15T07:53:44.925Z</updated>
+    <updated>2016-12-15T08:01:09.398Z</updated>
     
     <content type="html">&lt;p&gt;volatile 是 java 中一个非常常见，功能非常强大的一个关键字，大家用的最多的地方可能就是单例模式的双重检查锁的写法中。提到 volatile ，不得不提 synchronized ， synchronized 是一个重量级锁，那么 volatile 是一个轻量级锁吗？并不是， volatile 是一个轻量级的同步关键字，那么 volatile 的语义到底是什么呢？这就是这篇文章要介绍的内容。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -39,8 +39,9 @@
 &lt;ol&gt;
 &lt;li&gt;为 SingleInstance 分配内存空间&lt;/li&gt;
 &lt;li&gt;调用 SingleInstance 的构造函数，初始化成员变量&lt;/li&gt;
-&lt;li&gt;为 sSingleInstance 赋值&lt;br&gt;根据前面的知识我们知道第 2 步和第 3 步可能会重排序，这样的话有可能某个线程获取到的单例就是未完全初始化的实例，为了解决这个问题，我们用 volatile 修饰 sSingleInstance 之后，根据上面的阻止重排序规则我们知道 volatile 写和前面的一条指令不会进行重排序，所以也就不会有问题了，这就是 volatile 的妙用。其实 volatile 远不止这点用处，在 Java 提供的并发包中有很多工具类的实现基础就是 volatile ，这些大家可以进一步了解。&lt;/li&gt;
+&lt;li&gt;为 sSingleInstance 赋值&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;根据前面的知识我们知道第 2 步和第 3 步可能会重排序，这样的话有可能某个线程获取到的单例就是未完全初始化的实例，为了解决这个问题，我们用 volatile 修饰 sSingleInstance 之后，根据上面的阻止重排序规则我们知道 volatile 写和前面的一条指令不会进行重排序，所以也就不会有问题了，这就是 volatile 的妙用。其实 volatile 远不止这点用处，在 Java 提供的并发包中有很多工具类的实现基础就是 volatile ，这些大家可以进一步了解。&lt;/p&gt;
 &lt;h3 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://tutorials.jenkov.com/java-concurrency/java-memory-model.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Java Memory Model&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://tutorials.jenkov.com/java-concurrency/volatile.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Java Volatile Keyword&lt;/a&gt;&lt;/p&gt;
 </content>
     
